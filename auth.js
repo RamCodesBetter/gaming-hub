@@ -18,10 +18,15 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 // Sign Up
-async function signup(email, password) {
+async function signup(username, name, email, password) {
     try {
+        // Create user with email and password
         await createUserWithEmailAndPassword(auth, email, password);
+        
+        // Optionally store username and name in a database or local storage
         alert('User registered successfully!');
+
+        // You can also add logic here to save the username and name to a database if needed
     } catch (error) {
         alert(error.message);
     }
@@ -46,9 +51,18 @@ async function logout() {
 // Add event listeners for your forms
 document.getElementById('signupForm').onsubmit = async (e) => {
     e.preventDefault();
+    const username = document.getElementById('signupUsername').value;
+    const name = document.getElementById('signupName').value;
     const email = document.getElementById('signupEmail').value;
     const password = document.getElementById('signupPassword').value;
-    await signup(email, password);
+    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+    if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+    }
+
+    await signup(username, name, email, password);
 };
 
 document.getElementById('loginForm').onsubmit = async (e) => {
