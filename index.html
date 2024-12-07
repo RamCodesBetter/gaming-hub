@@ -16,81 +16,15 @@
         <link rel="stylesheet" href="style.css" />
     </head>
 
-    <body>
-        <div class="auth-buttons">
-            <button id="loginBtn">Login</button>
-            <button id="signupBtn">Sign Up</button>
-            <button id="profileBtn" style="display: none;">Profile</button>
-            <button id="logoutBtn" style="display: none;">Logout</button>
-        </div>
-
+      <body>
         <div class="heading">
-            <h1>RammyBoi's Game Hub</h1>
-            <p id="welcomeMessage">Welcome, Guest!</p>
-            <div class="search-container">
-                <input type="text" id="searchBar" placeholder="What's your next play?">
-            </div>
+          <h1>RammyBoi's Game Hub</h1>
+          <div class="search-container">
+              <input type="text" id="searchBar" placeholder="What's your next play?">
+          </div>
         </div>
-
-        <!-- Login Modal -->
-        <div id="loginModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Login</h2>
-                <form id="loginForm">
-                  <input type="email" id="loginEmail" placeholder="Email" required>
-                  <input type="password" id="loginPassword" placeholder="Password" required>
-                  <button type="submit">Login</button>
-              </form>
-            </div>
-        </div>
-
-        <!-- Sign Up Modal -->
-        <div id="signupModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Sign Up</h2>
-                <form id="signupForm">
-                    <form id="signupForm">
-                        <input type="text" id="signupUsername" placeholder="Username" required>
-                        <input type="text" id="signupName" placeholder="Name" required>
-                        <input type="email" id="signupEmail" placeholder="Email" required>
-                        <input type="password" id="signupPassword" placeholder="Password" required>
-                        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
-                        <button type="submit">Sign Up</button>
-                    </form>
-                </form>
-            </div>
-        </div>
-
-        <!-- Profile Modal -->
-        <div id="profileModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Profile</h2>
-                <div class="profile-tabs">
-                    <button class="tab-btn active" data-tab="account">Account</button>
-                    <button class="tab-btn" data-tab="stats">Game Stats</button>
-                </div>
-                <div id="accountTab" class="tab-content">
-                    <form id="profileForm">
-                        <input type="text" id="profileUsername" placeholder="Username" readonly>
-                        <input type="text" id="profileName" placeholder="Name">
-                        <input type="email" id="profileEmail" placeholder="Email">
-                        <textarea id="profileBio" placeholder="Bio"></textarea>
-                        <button type="submit">Save Changes</button>
-                    </form>
-                </div>
-                <div id="statsTab" class="tab-content" style="display: none;">
-                    <div id="gameStats">
-                        <!-- Game stats will be populated here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <button id="logoutBtn">Logout</button>
-
+        <br><br><br><br>
+        
         <div class="games-grid">
           <div class="game-tile"><a href="1/index.html">1</a></div>
           <div class="game-tile"><a href="1v1.lol/index.html">1v1.LOL</a></div>
@@ -182,7 +116,8 @@
               <a href="https://github.com/ramcodesbetter">Source Code</a>
             </div>
         </footer>
-        <script type="module" src="auth.js"></script>
-        <script type="module" src="script.js"></script>
+
+        <script src="script.js"></script>
+        <script src="auth.js"></script>
       </body>
 </html>
