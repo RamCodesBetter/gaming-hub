@@ -36,6 +36,31 @@ html {
   border-color: #c58af9;
   box-shadow: 0 0 10px rgba(197, 138, 249, 0.5);
 }
+.category-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.category-btn {
+  padding: 8px 16px;
+  border: 2px solid #8ab4f8;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #8ab4f8;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.3s ease;
+}
+.category-btn:hover {
+  background-color: #8ab4f8;
+  color: #202124;
+}
+.category-btn.active {
+  background-color: #8ab4f8;
+  color: #202124;
+}
 .games-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

@@ -1,7 +1,95 @@
 document.addEventListener('DOMContentLoaded', function() {
     const searchBar = document.getElementById('searchBar');
     const favoritesGrid = document.getElementById('favoritesGrid');
+    const categoryButtons = document.querySelectorAll('.category-btn');
     let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    let currentCategory = 'all';
+
+    // Game categories data
+    const gameCategories = {
+        '1': ['puzzle'],
+        '1v1.lol': ['action', 'sports'],
+        '10minutestilldawn': ['action', 'adventure'],
+        '2048': ['puzzle'],
+        'A Dance of Fire And Ice': ['puzzle', 'adventure'],
+        'A Dark Room': ['adventure'],
+        'Adrenaline Challenge': ['action', 'sports'],
+        'Adventure Drivers': ['action', 'sports'],
+        'Asteroids': ['action'],
+        'Astray': ['puzzle', 'adventure'],
+        'Backcountry': ['sports', 'adventure'],
+        'Bad Ice Cream': ['puzzle', 'action'],
+        'Bad Ice Cream 2': ['puzzle', 'action'],
+        'Bad Ice Cream 3': ['puzzle', 'action'],
+        'Basket Random': ['sports'],
+        'BitLife': ['adventure'],
+        'Bounceback': ['action'],
+        'Boxing Random': ['sports', 'action'],
+        'BreakLock': ['puzzle'],
+        'Breakout': ['action'],
+        'Chess': ['puzzle'],
+        'Chrome Dino': ['action'],
+        'Connect 3': ['puzzle'],
+        'Cookie Clicker': ['puzzle'],
+        'Cubefield': ['action'],
+        'Doodle Jump': ['action'],
+        'Duck Life': ['adventure', 'sports'],
+        'Duck Life 2': ['adventure', 'sports'],
+        'Duck Life 3': ['adventure', 'sports'],
+        'Duck Life 4': ['adventure', 'sports'],
+        'Edge Surf': ['action'],
+        'Evil Glitch': ['action'],
+        'Factory Balls Forever': ['puzzle'],
+        'Fireboy and Watergirl in the Forest Temple': ['puzzle', 'adventure'],
+        'Flappy Bird': ['action'],
+        'Friendly Fire': ['action'],
+        'Geometry Dash': ['action', 'puzzle'],
+        'Gopher Kart': ['sports', 'action'],
+        'Hextris': ['puzzle'],
+        'Ice Age Baby Adventure': ['adventure'],
+        'Jumping frogs puzzle': ['puzzle'],
+        'Konnekt': ['puzzle'],
+        'Minecraft 0.30': ['adventure'],
+        'Minecraft 1.3': ['adventure'],
+        'Minecraft 1.5.2': ['adventure'],
+        'Moto X3M 2': ['action', 'sports'],
+        'OvO': ['action', 'puzzle'],
+        'Pac-Man': ['action'],
+        'Pushback': ['puzzle'],
+        'Racer': ['sports', 'action'],
+        'Radius Raid': ['action'],
+        'Retro Bowl': ['sports'],
+        'Retrohaunt': ['adventure'],
+        'Riddle School': ['puzzle', 'adventure'],
+        'Riddle School 2': ['puzzle', 'adventure'],
+        'Riddle School 3': ['puzzle', 'adventure'],
+        'Riddle School 4': ['puzzle', 'adventure'],
+        'Riddle School 5': ['puzzle', 'adventure'],
+        'Roadblocks': ['puzzle'],
+        'Sleeping Beauty': ['adventure'],
+        'Slope': ['action'],
+        'Snake': ['action'],
+        'Snow Rider 3D': ['sports', 'action'],
+        'Soccer Random': ['sports'],
+        'Space Company': ['puzzle', 'adventure'],
+        'Space Invaders': ['action'],
+        'Tetris': ['puzzle'],
+        'The Chroma Incident': ['action', 'adventure'],
+        'THERE IS NO GAME!': ['puzzle', 'adventure'],
+        'Tower Master': ['action'],
+        'Tunnel Rush': ['action'],
+        'Under Run': ['action'],
+        'Vex 3': ['action', 'adventure'],
+        'Vex 4': ['action', 'adventure'],
+        'Vex 5': ['action', 'adventure'],
+        'Vex 6': ['action', 'adventure'],
+        'Vex 7': ['action', 'adventure'],
+        'Volley Random': ['sports'],
+        'Webretro': ['adventure'],
+        'World\'s Hardest Game': ['puzzle', 'action'],
+        'World\'s Hardest Game 2': ['puzzle', 'action'],
+        'xx142-b2.exe': ['action', 'adventure']
+    };
 
     // Initialize favorites from localStorage
     function initializeFavorites() {
@@ -82,19 +170,46 @@ document.addEventListener('DOMContentLoaded', function() {
         star.addEventListener('click', handleStarClick);
     });
 
+    // Filter games by category
+    function filterGamesByCategory(category) {
+        const gameTiles = document.querySelectorAll('.games-grid .game-tile');
+        gameTiles.forEach(tile => {
+            const gameTitle = tile.querySelector('a').textContent;
+            if (category === 'all' || (gameCategories[gameTitle] && gameCategories[gameTitle].includes(category))) {
+                tile.style.display = '';
+            } else {
+                tile.style.display = 'none';
+            }
+        });
+    }
+
+    // Category button click handler
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+            // Update current category and filter games
+            currentCategory = button.dataset.category;
+            filterGamesByCategory(currentCategory);
+        });
+    });
+
     // Search functionality
     searchBar.addEventListener('input', function() {
-        const filter = this.value.toLowerCase();
-        const gameTiles = document.getElementsByClassName('game-tile');
-        for (let i = 0; i < gameTiles.length; i++) {
-            const gameLink = gameTiles[i].getElementsByTagName('a')[0];
-            const gameName = gameLink.textContent || gameLink.innerText;
-            if (gameName.toLowerCase().indexOf(filter) > -1) {
-                gameTiles[i].style.display = '';
-            } else {
-                gameTiles[i].style.display = 'none';
-            }
-        }
+        const searchTerm = this.value.toLowerCase();
+        const gameTiles = document.querySelectorAll('.games-grid .game-tile');
+        
+        gameTiles.forEach(tile => {
+            const gameTitle = tile.querySelector('a').textContent.toLowerCase();
+            const matchesSearch = gameTitle.includes(searchTerm);
+            const matchesCategory = currentCategory === 'all' || 
+                (gameCategories[tile.querySelector('a').textContent] && 
+                 gameCategories[tile.querySelector('a').textContent].includes(currentCategory));
+            
+            tile.style.display = matchesSearch && matchesCategory ? '' : 'none';
+        });
     });
 
     // Initialize favorites on page load
