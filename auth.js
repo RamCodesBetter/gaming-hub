@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore"; // Import Firestore functions
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,17 +17,25 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app); // Initialize Firestore
 
 // Sign Up
 async function signup(username, name, email, password) {
     try {
         // Create user with email and password
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         
-        // Optionally store username and name in a database or local storage
-        alert('User registered successfully!');
+        // Get the user ID
+        const userId = userCredential.user.uid;
 
-        // You can also add logic here to save the username and name to a database if needed
+        // Store username and name in Firestore
+        await setDoc(doc(db, "users", userId), {
+            username: username,
+            name: name,
+            email: email
+        });
+
+        alert('User registered successfully!');
     } catch (error) {
         alert(error.message);
     }
