@@ -248,6 +248,24 @@ html {
 .favorite-star.fas {
   color: #c58af9;
 }
+.fullscreen-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 8px;
+    margin-left: 5px;
+    transition: color 0.3s ease;
+}
+
+.fullscreen-btn:hover {
+    color: #4CAF50;
+}
+
+.fullscreen-btn.active i::before {
+    content: "\f066"; /* Font Awesome compress icon */
+}
 .footer {
   position: fixed;
   left: 0;

@@ -376,4 +376,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize similar games section
     updateSimilarGames();
+
+    // Fullscreen toggle functionality
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.log(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+            fullscreenBtn.querySelector('i').classList.remove('fa-expand');
+            fullscreenBtn.querySelector('i').classList.add('fa-compress');
+        } else {
+            document.exitFullscreen();
+            fullscreenBtn.querySelector('i').classList.remove('fa-compress');
+            fullscreenBtn.querySelector('i').classList.add('fa-expand');
+        }
+    }
+
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+    // Listen for fullscreen changes
+    document.addEventListener('fullscreenchange', () => {
+        fullscreenBtn.classList.toggle('active', document.fullscreenElement);
+    });
 });
