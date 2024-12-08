@@ -363,13 +363,160 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add click handlers to game links
+    let gameWindow = null; // Store reference to game window
+
+    // Modify the existing game link click handler to include play time tracking
     document.querySelectorAll('.game-tile a').forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default link behavior
             const gameTitle = link.textContent;
-            trackPlayedGame(gameTitle);
+            const gameUrl = link.href;
+            
+            // Start the timer
+            startGameTimer(gameTitle);
+            
+            // Open the game in a new window and store reference
+            gameWindow = window.open(gameUrl, '_blank', 'width=800,height=600');
+            
+            // Check if game window is closed every 500ms
+            const checkWindow = setInterval(() => {
+                if (gameWindow && gameWindow.closed) {
+                    stopGameTimer();
+                    clearInterval(checkWindow);
+                    gameWindow = null;
+                }
+            }, 500);
         });
     });
+
+    // Track when user leaves the page or closes game window
+    window.addEventListener('beforeunload', () => {
+        stopGameTimer();
+        if (gameWindow && !gameWindow.closed) {
+            gameWindow.close();
+        }
+    });
+
+    // Track when user switches tabs or minimizes
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            // When the page becomes visible, check if game window is still open
+            if (gameWindow && gameWindow.closed && currentGame) {
+                stopGameTimer();
+                gameWindow = null;
+            }
+        }
+    });
+
+    // Play time tracking
+    let gamePlayTimes = JSON.parse(localStorage.getItem('gamePlayTimes') || '{}');
+    let currentGame = localStorage.getItem('currentGame');
+    let gameStartTime = localStorage.getItem('gameStartTime') ? parseInt(localStorage.getItem('gameStartTime')) : null;
+    let updateInterval = null;
+
+    function formatTime(seconds) {
+        const hrs = Math.floor(seconds / 3600);
+        const mins = Math.floor((seconds % 3600) / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function updatePlayTimeDisplay() {
+        // Calculate current session time if a game is active
+        let currentSessionTime = 0;
+        if (currentGame && gameStartTime) {
+            currentSessionTime = Math.floor((Date.now() - gameStartTime) / 1000);
+        }
+
+        // Update total play time
+        const savedTotalSeconds = Object.values(gamePlayTimes).reduce((a, b) => a + b, 0);
+        const totalSeconds = savedTotalSeconds + (currentGame ? currentSessionTime : 0);
+        document.getElementById('totalPlaytime').textContent = formatTime(totalSeconds);
+
+        // Update per-game play times
+        const gamePlaytimeList = document.getElementById('gamePlaytimeList');
+        gamePlaytimeList.innerHTML = '';
+        
+        // Create a copy of play times for current display
+        let currentPlayTimes = {...gamePlayTimes};
+        if (currentGame) {
+            currentPlayTimes[currentGame] = (currentPlayTimes[currentGame] || 0) + currentSessionTime;
+        }
+
+        // Sort games by play time (descending)
+        const sortedGames = Object.entries(currentPlayTimes)
+            .sort(([,a], [,b]) => b - a);
+
+        sortedGames.forEach(([game, seconds]) => {
+            const div = document.createElement('div');
+            div.className = 'game-playtime-item';
+            div.innerHTML = `
+                ${game} <span>${formatTime(seconds)}</span>
+            `;
+            gamePlaytimeList.appendChild(div);
+        });
+    }
+
+    function startGameTimer(gameTitle) {
+        stopGameTimer(); // Stop any existing timer
+        currentGame = gameTitle;
+        gameStartTime = Date.now();
+        
+        // Store in localStorage
+        localStorage.setItem('currentGame', currentGame);
+        localStorage.setItem('gameStartTime', gameStartTime.toString());
+        
+        // Start interval for real-time updates
+        if (updateInterval) {
+            clearInterval(updateInterval);
+        }
+        updateInterval = setInterval(() => {
+            if (currentGame && gameWindow && !gameWindow.closed) {
+                updatePlayTimeDisplay();
+            } else if (currentGame && (!gameWindow || gameWindow.closed)) {
+                stopGameTimer();
+                gameWindow = null;
+            }
+        }, 1000);
+        
+        // Initial update
+        updatePlayTimeDisplay();
+    }
+
+    function stopGameTimer() {
+        if (currentGame && gameStartTime) {
+            const playTime = Math.floor((Date.now() - gameStartTime) / 1000);
+            gamePlayTimes[currentGame] = (gamePlayTimes[currentGame] || 0) + playTime;
+            localStorage.setItem('gamePlayTimes', JSON.stringify(gamePlayTimes));
+            
+            // Clear current game data
+            localStorage.removeItem('currentGame');
+            localStorage.removeItem('gameStartTime');
+            currentGame = null;
+            gameStartTime = null;
+            
+            // Clear the update interval
+            if (updateInterval) {
+                clearInterval(updateInterval);
+                updateInterval = null;
+            }
+            
+            updatePlayTimeDisplay();
+        }
+    }
+
+    // Start update interval if there's an active game
+    if (currentGame) {
+        updateInterval = setInterval(() => {
+            updatePlayTimeDisplay();
+        }, 1000);
+    }
+
+    // Update display when page loads
+    if (currentGame && gameStartTime) {
+        updateInterval = setInterval(updatePlayTimeDisplay, 1000);
+    }
+    updatePlayTimeDisplay();
 
     // Initialize favorites on page load
     initializeFavorites();
