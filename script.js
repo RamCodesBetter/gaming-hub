@@ -597,4 +597,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('fullscreenchange', () => {
         fullscreenBtn.classList.toggle('active', document.fullscreenElement);
     });
+
+    // Reset all stats functionality
+    document.getElementById('resetStatsBtn').addEventListener('click', () => {
+        // Clear localStorage entries
+        localStorage.removeItem('gamePlayTimes');
+        localStorage.removeItem('currentGame');
+        localStorage.removeItem('gameStartTime');
+        localStorage.removeItem('favorites');
+        localStorage.removeItem('lastPlayedGames');
+
+        // Reset play time display
+        document.getElementById('totalPlaytime').textContent = '00:00:00';
+        document.getElementById('gamePlaytimeList').innerHTML = '';
+
+        // Optionally, show a confirmation message
+        alert('All stats and progress have been reset!');
+    });
 });

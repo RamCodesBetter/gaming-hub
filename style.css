@@ -375,6 +375,23 @@ a:hover {
     color: #ff0000;
 }
 
+#resetStatsBtn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+    transition: background-color 0.3s;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#resetStatsBtn:hover {
+    background-color: #ff1a1a;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .content-wrapper {
