@@ -365,6 +365,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let gameWindow = null; // Store reference to game window
 
+    // FPS Counter functionality
+    let fps = 0;
+    let lastLoop = performance.now();
+    let fpsCounter = document.getElementById('fpsCounter');
+    let frameCount = 0;
+    let lastFpsUpdate = performance.now();
+    let fpsUpdateInterval = 500; // Update FPS display every 500ms
+    let fpsInterval;
+
+    function updateFPS() {
+        const currentLoop = performance.now();
+        frameCount++;
+
+        if (currentLoop > lastFpsUpdate + fpsUpdateInterval) {
+            fps = Math.round((frameCount * 1000) / (currentLoop - lastFpsUpdate));
+            frameCount = 0;
+            lastFpsUpdate = currentLoop;
+
+            // Update FPS counter text and color
+            fpsCounter.textContent = `FPS: ${fps}`;
+            
+            // Update color based on FPS value
+            fpsCounter.classList.remove('good', 'ok', 'bad');
+            if (fps >= 50) {
+                fpsCounter.classList.add('good');
+            } else if (fps >= 30) {
+                fpsCounter.classList.add('ok');
+            } else {
+                fpsCounter.classList.add('bad');
+            }
+        }
+
+        requestAnimationFrame(updateFPS);
+    }
+
+    function startFPSCounter() {
+        fpsCounter.classList.add('visible');
+        frameCount = 0;
+        lastFpsUpdate = performance.now();
+        requestAnimationFrame(updateFPS);
+    }
+
+    function stopFPSCounter() {
+        fpsCounter.classList.remove('visible');
+        cancelAnimationFrame(fpsInterval);
+    }
+
+    // Start the FPS counter on page load
+    startFPSCounter();
+
     // Modify the existing game link click handler to include play time tracking
     document.querySelectorAll('.game-tile a').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -392,6 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Track when user leaves the page or closes game window
     window.addEventListener('beforeunload', () => {
         stopGameTimer();
+        stopFPSCounter(); // Stop FPS counter when leaving the page
         if (gameWindow && !gameWindow.closed) {
             gameWindow.close();
         }
@@ -400,7 +451,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Track when user switches tabs or minimizes
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden) {
-            // When the page becomes visible, check if game window is still open
             if (gameWindow && gameWindow.closed && currentGame) {
                 stopGameTimer();
                 gameWindow = null;
