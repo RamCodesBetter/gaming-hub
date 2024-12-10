@@ -436,6 +436,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     gameWindow = null;
                 }
             }, 500);
+            
+            // Update lastPlayedGames array and refresh similar games display
+            lastPlayedGames.unshift({ title: gameTitle });
+            localStorage.setItem('lastPlayedGames', JSON.stringify(lastPlayedGames));
+            updateSimilarGames();
         });
     });
 
