@@ -607,6 +607,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('resetStatsBtn').addEventListener('click', () => {
         // Clear localStorage entries
         localStorage.removeItem('gamePlayTimes');
+        gamePlayTimes = {}; // Clear the gamePlayTimes object
         localStorage.removeItem('currentGame');
         localStorage.removeItem('gameStartTime');
         localStorage.removeItem('favorites');
