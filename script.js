@@ -620,4 +620,47 @@ document.addEventListener('DOMContentLoaded', function() {
         // Optionally, show a confirmation message
         alert('All stats and progress have been reset!');
     });
+
+    const heading = document.querySelector('.heading');
+
+    // Create clock and date elements
+    const clockDateWrapper = document.createElement('div');
+    clockDateWrapper.style.position = 'absolute';
+    clockDateWrapper.style.top = '10px';
+    clockDateWrapper.style.left = '10px';
+    clockDateWrapper.style.color = '#ABCDEF';
+    clockDateWrapper.style.fontFamily = 'Orbitron, sans-serif';
+    clockDateWrapper.style.fontSize = '22px';
+
+    const clockElement = document.createElement('div');
+    const dateElement = document.createElement('div');
+
+    clockDateWrapper.appendChild(clockElement);
+    clockDateWrapper.appendChild(dateElement);
+    heading.appendChild(clockDateWrapper);
+
+    function updateClockAndDate() {
+        const now = new Date();
+
+        // Format time as hh:mm:ss AM/PM
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // Convert 0 to 12
+
+        clockElement.textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+        // Format date as mm-dd-yyyy
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const year = now.getFullYear();
+
+        dateElement.textContent = `${month}-${day}-${year}`;
+    }
+
+    // Update clock and date every second
+    setInterval(updateClockAndDate, 1000);
+    updateClockAndDate(); // Initial call to set right away
 });
