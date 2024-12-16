@@ -124,6 +124,7 @@ html {
   margin: 10px 0;
 }
 .category-btn {
+  margin-top: 20px;
   padding: 8px 16px;
   border: 2px solid #8ab4f8;
   border-radius: 20px;
@@ -390,6 +391,15 @@ a:hover {
 
 #resetStatsBtn:hover {
     background-color: #ff1a1a;
+}
+
+#music {
+    font-size: 5px;
+}
+
+#musicLog {
+    margin-top: 10px;
+    margin-bottom: 8px;
 }
 
 /* Responsive Design */

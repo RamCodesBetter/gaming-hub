@@ -126,6 +126,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 star.classList.remove('far');
                 star.classList.add('fas');
                 favoritesGrid.appendChild(clonedTile);
+
+                // Add click handler to open game in new tab
+                const gameLink = clonedTile.querySelector('a');
+                gameLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const gameWindow = window.open(gameLink.href, '_blank');
+                    startGameTimer(gameTitle, gameWindow);
+                });
             }
         });
 
@@ -338,6 +346,13 @@ document.addEventListener('DOMContentLoaded', function() {
             gameLink.href = `${game.toLowerCase().replace(/ /g, '')}/index.html`;
             gameLink.textContent = game;
             
+            // Add click handler to open game in new tab
+            gameLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const gameWindow = window.open(gameLink.href, '_blank');
+                startGameTimer(game, gameWindow);
+            });
+            
             // Add categories as tags
             if (gameCategories[game]) {
                 const categoriesDiv = document.createElement('div');
@@ -422,18 +437,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const gameTitle = link.textContent;
             const gameUrl = link.href;
             
-            // Start the timer
-            startGameTimer(gameTitle);
-            
             // Open the game in a new window and store reference
-            gameWindow = window.open(gameUrl, '_blank', 'width=800,height=600');
+            const gameWindow = window.open(gameUrl, '_blank', 'width=800,height=600');
+            
+            // Start the timer
+            startGameTimer(gameTitle, gameWindow);
             
             // Check if game window is closed every 500ms
             const checkWindow = setInterval(() => {
                 if (gameWindow && gameWindow.closed) {
                     stopGameTimer();
                     clearInterval(checkWindow);
-                    gameWindow = null;
                 }
             }, 500);
             
@@ -512,7 +526,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function startGameTimer(gameTitle) {
+    function startGameTimer(gameTitle, gameWindow) {
         stopGameTimer(); // Stop any existing timer
         currentGame = gameTitle;
         gameStartTime = Date.now();
@@ -530,7 +544,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 updatePlayTimeDisplay();
             } else if (currentGame && (!gameWindow || gameWindow.closed)) {
                 stopGameTimer();
-                gameWindow = null;
             }
         }, 1000);
         
@@ -611,11 +624,23 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.removeItem('currentGame');
         localStorage.removeItem('gameStartTime');
         localStorage.removeItem('favorites');
+        favorites = []; // Clear the favorites array
         localStorage.removeItem('lastPlayedGames');
+        lastPlayedGames = []; // Clear the lastPlayedGames array
 
         // Reset play time display
         document.getElementById('totalPlaytime').textContent = '00:00:00';
         document.getElementById('gamePlaytimeList').innerHTML = '';
+
+        // Reset favorites UI
+        document.querySelectorAll('.favorite-star').forEach(star => {
+            star.classList.remove('fas');
+            star.classList.add('far');
+        });
+        updateFavoritesGrid();
+
+        // Reset similar games UI
+        updateSimilarGames();
 
         // Optionally, show a confirmation message
         alert('All stats and progress have been reset!');
@@ -663,4 +688,84 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update clock and date every second
     setInterval(updateClockAndDate, 1000);
     updateClockAndDate(); // Initial call to set right away
+
+    // Create an audio element for lofi beats
+    const lofiAudio = new Audio('Colorful-Flowers(chosic.com).mp3'); // Replace with the actual path to the lofi beats file
+    let isPlaying = false;
+    lofiAudio.loop = true; // Enables looping
+
+    let logContainer = document.getElementById('musicContainer');
+
+    // Function to log messages to the log container
+    function appendLog(message) {
+        const logMessage = document.getElementById('musicLog');
+        logMessage.textContent = message;
+        logContainer.appendChild(logMessage);
+        logContainer.scrollTop = logContainer.scrollHeight; // Auto-scroll to the latest log
+    }
+
+    // Function to toggle play/pause
+    function toggleLofiBeats() {
+        if (isPlaying) {
+            lofiAudio.pause();
+            appendLog('Paused Lofi Beats');
+        } else {
+            if (lofiAudio.ended) {
+                lofiAudio.currentTime = 0; // Reset to the beginning if the audio has ended
+            }
+            lofiAudio.play();
+            appendLog('Playing Lofi Beats');
+        }
+        isPlaying = !isPlaying;
+    }
+
+    // Function to log the audio progress
+    function logAudioProgress() {
+        if (lofiAudio.readyState >= 1) { // Check if metadata is loaded
+            const totalDuration = lofiAudio.duration; // Total length of the audio
+            const currentTime = lofiAudio.currentTime; // Current playback position
+            
+            const totalMinutes = Math.floor(totalDuration / 60);
+            const totalSeconds = Math.floor(totalDuration % 60);
+
+            const currentMinutes = Math.floor(currentTime / 60);
+            const currentSeconds = Math.floor(currentTime % 60);
+
+            appendLog(
+                `Total Duration: ${totalMinutes}:${totalSeconds.toString().padStart(2, '0')} | ` +
+                `Elapsed Time: ${currentMinutes}:${currentSeconds.toString().padStart(2, '0')}`
+            );
+        } else {
+            appendLog('Audio metadata not loaded yet.');
+        }
+    }
+
+    // Add event listener for key combination
+    document.addEventListener('keydown', function (event) {
+        if (
+            (event.metaKey || event.ctrlKey) && // Command on Mac, Control on Windows
+            event.altKey &&
+            event.shiftKey &&
+            event.code === 'KeyL'
+        ) {
+            event.preventDefault(); // Prevent any default behavior for this key combo
+            toggleLofiBeats();
+        }
+    });
+
+    // Set an interval to update the audio progress every second
+    setInterval(() => {
+        if (isPlaying) {
+            logAudioProgress();
+        }
+    }, 1000);
+
+    // Stop music and logging when the user leaves the page
+    window.addEventListener('beforeunload', () => {
+        if (isPlaying) {
+            lofiAudio.pause();
+            isPlaying = false;
+        }
+        appendLog('User left the page. Music stopped.');
+    });
 });
