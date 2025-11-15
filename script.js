@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'Moto X3M 2': ['Action', 'Sports'],
         'OvO': ['Action', 'Puzzle'],
         'Pac-Man': ['Action'],
+        'Polytrack': ['Sports', 'Action'],
         'Pushback': ['Puzzle'],
         'Racer': ['Sports', 'Action'],
         'Radius Raid': ['Action'],
