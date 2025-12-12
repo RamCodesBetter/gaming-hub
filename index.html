@@ -208,6 +208,22 @@
             </div>
           </div>
         </div>
+
+        <div class="panel danger-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-trash-can"></i>
+              <span>Reset Data</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <p class="reset-warning">This will clear all your favorites, playtime, and history.</p>
+            <button id="resetStatsBtn" class="reset-btn">
+              <i class="fas fa-rotate-left"></i>
+              <span>Reset All Progress</span>
+            </button>
+          </div>
+        </div>
       </aside>
 
       <!-- Games Grid -->
@@ -229,11 +245,61 @@
         
         <div class="games-grid" id="gamesGrid">
           <!-- Games will be dynamically loaded by JavaScript -->
-        </div>
+            </div>
       </section>
 
       <!-- Right Sidebar -->
       <aside class="sidebar sidebar-right">
+        <!-- School Schedule Tracker -->
+        <div class="panel schedule-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-school"></i>
+              <span>School Schedule</span>
+            </div>
+            <span class="panel-badge live" id="scheduleStatus">
+              <span class="live-indicator"></span>
+              Live
+            </span>
+          </div>
+          <div class="panel-body">
+            <div class="schedule-display">
+              <div class="current-period" id="currentPeriod">
+                <div class="period-icon">
+                  <i class="fas fa-book-open"></i>
+            </div>
+                <div class="period-info">
+                  <span class="period-name" id="periodName">Loading...</span>
+                  <span class="period-time" id="periodTime">--:-- - --:--</span>
+            </div>
+          </div>
+              <div class="time-remaining">
+                <div class="time-circle">
+                  <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="42" class="circle-bg"/>
+                    <circle cx="50" cy="50" r="42" class="circle-progress schedule-progress" id="scheduleRing"/>
+                  </svg>
+                  <div class="time-value">
+                    <span class="time-left" id="timeLeft">--:--</span>
+                    <span class="time-label">remaining</span>
+            </div>
+            </div>
+          </div>
+              <div class="next-up" id="nextUp">
+                <i class="fas fa-arrow-right"></i>
+                <span>Next: <strong id="nextPeriod">--</strong></span>
+            </div>
+            </div>
+            <div class="lunch-toggle">
+              <span class="toggle-label">Lunch Schedule:</span>
+              <div class="toggle-buttons">
+                <button class="lunch-btn active" data-lunch="A" id="lunchA">A</button>
+                <button class="lunch-btn" data-lunch="B" id="lunchB">B</button>
+          </div>
+            </div>
+            </div>
+          </div>
+
         <div class="panel recommendations-panel">
           <div class="panel-header">
             <div class="panel-title">
@@ -272,6 +338,31 @@
           </div>
         </div>
 
+        <div class="panel quicklinks-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-bolt"></i>
+              <span>Quick Actions</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="quick-actions">
+              <button class="quick-btn" id="hideUIBtn" title="Hide UI for stealth mode">
+                <i class="fas fa-eye-slash"></i>
+                <span>Stealth Mode</span>
+              </button>
+              <button class="quick-btn" id="panicBtn" title="Quick escape!">
+                <i class="fas fa-door-open"></i>
+                <span>Panic Button</span>
+              </button>
+              <button class="quick-btn" id="historyBtn" title="View game history">
+                <i class="fas fa-clock-rotate-left"></i>
+                <span>History</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="panel settings-panel">
           <div class="panel-header">
             <div class="panel-title">
@@ -280,10 +371,22 @@
             </div>
           </div>
           <div class="panel-body">
-            <button id="resetStatsBtn" class="reset-btn">
-              <i class="fas fa-rotate-left"></i>
-              <span>Reset All Progress</span>
-            </button>
+            <div class="settings-options">
+              <div class="setting-item">
+                <span>Particles</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="particlesToggle" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <span>Animations</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="animationsToggle" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </aside>
@@ -294,6 +397,51 @@
       <i class="fas fa-gauge-high"></i>
       <span id="fpsValue">60</span>
       <span>FPS</span>
+    </div>
+
+    <!-- History Modal -->
+    <div class="modal" id="historyModal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-clock-rotate-left"></i> Game History</h3>
+          <button class="modal-close" id="closeHistoryBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="history-list" id="historyList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panic Overlay (fake Google Docs) -->
+    <div class="panic-overlay" id="panicOverlay">
+      <div class="panic-header">
+        <div class="panic-logo">
+          <svg viewBox="0 0 24 24" width="40" height="40">
+            <path fill="#4285F4" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+            <path fill="#F1F1F1" d="M14 2v6h6M16 13H8v2h8v-2zm0 4H8v2h8v-2zm-5-8H8v2h3V9z"/>
+          </svg>
+          <span>Google Docs</span>
+        </div>
+        <div class="panic-title">Untitled document</div>
+        <div class="panic-actions">
+          <button onclick="document.getElementById('panicOverlay').classList.remove('active')">Press ESC to exit</button>
+        </div>
+      </div>
+      <div class="panic-content">
+        <div class="panic-doc">
+          <h1>Important School Notes</h1>
+          <p>Chapter 5: The Industrial Revolution</p>
+          <p>The Industrial Revolution was the transition to new manufacturing processes in Great Britain, continental Europe, and the United States, that occurred during the period from around 1760 to about 1820-1840.</p>
+          <p>Key Points:</p>
+          <ul>
+            <li>Began in Great Britain</li>
+            <li>Transition from hand production to machines</li>
+            <li>New chemical and iron production processes</li>
+            <li>Improved efficiency of water power</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->

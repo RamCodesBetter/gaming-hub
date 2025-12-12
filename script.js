@@ -1124,6 +1124,340 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // ===== SCHOOL SCHEDULE SYSTEM =====
+    let lunchSchedule = localStorage.getItem('lunchSchedule') || 'A';
+    
+    // Schedule data - Regular days (Mon, Tue, Thu, Fri)
+    const regularSchedule = {
+        A: [
+            { name: 'Before School', start: '00:00', end: '08:10', icon: 'moon', type: 'out' },
+            { name: 'BBT', start: '08:10', end: '08:40', icon: 'coffee', type: 'class' },
+            { name: 'Passing', start: '08:40', end: '08:45', icon: 'walking', type: 'passing' },
+            { name: 'Period 1', start: '08:45', end: '09:35', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '09:35', end: '09:40', icon: 'walking', type: 'passing' },
+            { name: 'Period 2', start: '09:40', end: '10:30', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '10:30', end: '10:35', icon: 'walking', type: 'passing' },
+            { name: 'Period 3', start: '10:35', end: '11:25', icon: 'book-open', type: 'class' },
+            { name: 'Lunch A', start: '11:25', end: '11:55', icon: 'utensils', type: 'lunch' },
+            { name: 'Passing', start: '11:55', end: '12:00', icon: 'walking', type: 'passing' },
+            { name: 'Period 4', start: '12:00', end: '12:50', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '12:50', end: '12:55', icon: 'walking', type: 'passing' },
+            { name: 'Period 5', start: '12:55', end: '13:45', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '13:45', end: '13:50', icon: 'walking', type: 'passing' },
+            { name: 'Period 6', start: '13:50', end: '14:40', icon: 'book-open', type: 'class' },
+            { name: 'After School', start: '14:40', end: '23:59', icon: 'gamepad', type: 'out' }
+        ],
+        B: [
+            { name: 'Before School', start: '00:00', end: '08:10', icon: 'moon', type: 'out' },
+            { name: 'BBT', start: '08:10', end: '08:40', icon: 'coffee', type: 'class' },
+            { name: 'Passing', start: '08:40', end: '08:45', icon: 'walking', type: 'passing' },
+            { name: 'Period 1', start: '08:45', end: '09:35', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '09:35', end: '09:40', icon: 'walking', type: 'passing' },
+            { name: 'Period 2', start: '09:40', end: '10:30', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '10:30', end: '10:35', icon: 'walking', type: 'passing' },
+            { name: 'Period 3', start: '10:35', end: '11:25', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '11:25', end: '11:30', icon: 'walking', type: 'passing' },
+            { name: 'Period 4', start: '11:30', end: '12:20', icon: 'book-open', type: 'class' },
+            { name: 'Lunch B', start: '12:20', end: '12:50', icon: 'utensils', type: 'lunch' },
+            { name: 'Passing', start: '12:50', end: '12:55', icon: 'walking', type: 'passing' },
+            { name: 'Period 5', start: '12:55', end: '13:45', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '13:45', end: '13:50', icon: 'walking', type: 'passing' },
+            { name: 'Period 6', start: '13:50', end: '14:40', icon: 'book-open', type: 'class' },
+            { name: 'After School', start: '14:40', end: '23:59', icon: 'gamepad', type: 'out' }
+        ]
+    };
+    
+    // Wednesday schedule
+    const wednesdaySchedule = {
+        A: [
+            { name: 'Before School', start: '00:00', end: '10:20', icon: 'moon', type: 'out' },
+            { name: 'BBT', start: '10:20', end: '11:00', icon: 'coffee', type: 'class' },
+            { name: 'Passing', start: '11:00', end: '11:05', icon: 'walking', type: 'passing' },
+            { name: 'Period 1', start: '11:05', end: '11:40', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '11:40', end: '11:45', icon: 'walking', type: 'passing' },
+            { name: 'Period 2', start: '11:45', end: '12:20', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '12:20', end: '12:25', icon: 'walking', type: 'passing' },
+            { name: 'Period 3', start: '12:25', end: '13:00', icon: 'book-open', type: 'class' },
+            { name: 'Lunch A', start: '13:00', end: '13:30', icon: 'utensils', type: 'lunch' },
+            { name: 'Passing', start: '13:30', end: '13:35', icon: 'walking', type: 'passing' },
+            { name: 'Period 4', start: '13:35', end: '14:10', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '14:10', end: '14:15', icon: 'walking', type: 'passing' },
+            { name: 'Period 5', start: '14:15', end: '14:50', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '14:50', end: '14:55', icon: 'walking', type: 'passing' },
+            { name: 'Period 6', start: '14:55', end: '15:30', icon: 'book-open', type: 'class' },
+            { name: 'After School', start: '15:30', end: '23:59', icon: 'gamepad', type: 'out' }
+        ],
+        B: [
+            { name: 'Before School', start: '00:00', end: '10:20', icon: 'moon', type: 'out' },
+            { name: 'BBT', start: '10:20', end: '11:00', icon: 'coffee', type: 'class' },
+            { name: 'Passing', start: '11:00', end: '11:05', icon: 'walking', type: 'passing' },
+            { name: 'Period 1', start: '11:05', end: '11:40', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '11:40', end: '11:45', icon: 'walking', type: 'passing' },
+            { name: 'Period 2', start: '11:45', end: '12:20', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '12:20', end: '12:25', icon: 'walking', type: 'passing' },
+            { name: 'Period 3', start: '12:25', end: '13:00', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '13:00', end: '13:05', icon: 'walking', type: 'passing' },
+            { name: 'Period 4', start: '13:05', end: '13:40', icon: 'book-open', type: 'class' },
+            { name: 'Lunch B', start: '13:40', end: '14:10', icon: 'utensils', type: 'lunch' },
+            { name: 'Passing', start: '14:10', end: '14:15', icon: 'walking', type: 'passing' },
+            { name: 'Period 5', start: '14:15', end: '14:50', icon: 'book-open', type: 'class' },
+            { name: 'Passing', start: '14:50', end: '14:55', icon: 'walking', type: 'passing' },
+            { name: 'Period 6', start: '14:55', end: '15:30', icon: 'book-open', type: 'class' },
+            { name: 'After School', start: '15:30', end: '23:59', icon: 'gamepad', type: 'out' }
+        ]
+    };
+
+    function timeToMinutes(timeStr) {
+        const [hours, minutes] = timeStr.split(':').map(Number);
+        return hours * 60 + minutes;
+    }
+
+    function formatTimeRemaining(minutes) {
+        if (minutes < 0) return '0:00';
+        const hrs = Math.floor(minutes / 60);
+        const mins = Math.floor(minutes % 60);
+        const secs = Math.floor((minutes % 1) * 60);
+        if (hrs > 0) {
+            return `${hrs}:${String(mins).padStart(2, '0')}`;
+        }
+        return `${mins}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function getCurrentSchedule() {
+        const now = new Date();
+        const dayOfWeek = now.getDay();
+        
+        // Weekend
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+            return null;
+        }
+        
+        // Wednesday
+        if (dayOfWeek === 3) {
+            return wednesdaySchedule[lunchSchedule];
+        }
+        
+        // Regular days
+        return regularSchedule[lunchSchedule];
+    }
+
+    function updateScheduleDisplay() {
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+        const schedule = getCurrentSchedule();
+        
+        const periodName = document.getElementById('periodName');
+        const periodTime = document.getElementById('periodTime');
+        const timeLeft = document.getElementById('timeLeft');
+        const nextPeriod = document.getElementById('nextPeriod');
+        const scheduleRing = document.getElementById('scheduleRing');
+        const periodIcon = document.querySelector('.period-icon');
+        const scheduleStatus = document.getElementById('scheduleStatus');
+        
+        // Weekend
+        if (!schedule) {
+            periodName.textContent = '🎉 Weekend!';
+            periodTime.textContent = 'No school today';
+            timeLeft.textContent = 'FREE';
+            nextPeriod.textContent = 'Monday';
+            periodIcon.className = 'period-icon out-of-school';
+            periodIcon.innerHTML = '<i class="fas fa-party-horn"></i>';
+            scheduleRing.style.strokeDashoffset = 0;
+            scheduleStatus.innerHTML = '<span class="live-indicator"></span> Weekend';
+            return;
+        }
+        
+        // Find current period
+        let currentPeriod = null;
+        let nextPeriodData = null;
+        
+        for (let i = 0; i < schedule.length; i++) {
+            const period = schedule[i];
+            const startMins = timeToMinutes(period.start);
+            const endMins = timeToMinutes(period.end);
+            
+            if (currentMinutes >= startMins && currentMinutes < endMins) {
+                currentPeriod = period;
+                nextPeriodData = schedule[i + 1] || null;
+                break;
+            }
+        }
+        
+        if (currentPeriod) {
+            const startMins = timeToMinutes(currentPeriod.start);
+            const endMins = timeToMinutes(currentPeriod.end);
+            const totalDuration = endMins - startMins;
+            const elapsed = currentMinutes - startMins;
+            const remaining = endMins - currentMinutes;
+            const progress = elapsed / totalDuration;
+            
+            // Update display
+            periodName.textContent = currentPeriod.name;
+            periodTime.textContent = `${currentPeriod.start} - ${currentPeriod.end.replace(/^(\d):/, '0$1:')}`;
+            timeLeft.textContent = formatTimeRemaining(remaining);
+            
+            // Update icon
+            periodIcon.innerHTML = `<i class="fas fa-${currentPeriod.icon}"></i>`;
+            periodIcon.className = 'period-icon';
+            if (currentPeriod.type === 'out') periodIcon.classList.add('out-of-school');
+            if (currentPeriod.type === 'lunch') periodIcon.classList.add('lunch');
+            if (currentPeriod.type === 'passing') periodIcon.classList.add('passing');
+            
+            // Update ring
+            const circumference = 2 * Math.PI * 42;
+            scheduleRing.style.strokeDasharray = circumference;
+            scheduleRing.style.strokeDashoffset = circumference * (1 - progress);
+            
+            // Color based on time remaining
+            scheduleRing.classList.remove('warning', 'danger');
+            if (remaining <= 5 && currentPeriod.type !== 'out') {
+                scheduleRing.classList.add('danger');
+            } else if (remaining <= 10 && currentPeriod.type !== 'out') {
+                scheduleRing.classList.add('warning');
+            }
+            
+            // Next period
+            if (nextPeriodData && nextPeriodData.type !== 'out') {
+                nextPeriod.textContent = nextPeriodData.name;
+            } else if (currentPeriod.type === 'out' && currentPeriod.name === 'After School') {
+                nextPeriod.textContent = 'Done for today! 🎮';
+            } else {
+                nextPeriod.textContent = '--';
+            }
+            
+            // Status badge
+            if (currentPeriod.type === 'out') {
+                scheduleStatus.innerHTML = '<span class="live-indicator" style="background:#22c55e;box-shadow:0 0 10px #22c55e;"></span> Free';
+            } else {
+                scheduleStatus.innerHTML = '<span class="live-indicator"></span> Live';
+            }
+        }
+    }
+
+    // Lunch toggle buttons
+    document.getElementById('lunchA').addEventListener('click', () => {
+        lunchSchedule = 'A';
+        localStorage.setItem('lunchSchedule', 'A');
+        document.getElementById('lunchA').classList.add('active');
+        document.getElementById('lunchB').classList.remove('active');
+        updateScheduleDisplay();
+    });
+
+    document.getElementById('lunchB').addEventListener('click', () => {
+        lunchSchedule = 'B';
+        localStorage.setItem('lunchSchedule', 'B');
+        document.getElementById('lunchB').classList.add('active');
+        document.getElementById('lunchA').classList.remove('active');
+        updateScheduleDisplay();
+    });
+
+    // Initialize lunch buttons
+    if (lunchSchedule === 'B') {
+        document.getElementById('lunchB').classList.add('active');
+        document.getElementById('lunchA').classList.remove('active');
+    }
+
+    // Update schedule every second
+    setInterval(updateScheduleDisplay, 1000);
+    updateScheduleDisplay();
+
+    // ===== QUICK ACTIONS =====
+    
+    // Stealth Mode
+    document.getElementById('hideUIBtn').addEventListener('click', () => {
+        document.body.classList.toggle('stealth-mode');
+        const btn = document.getElementById('hideUIBtn');
+        if (document.body.classList.contains('stealth-mode')) {
+            btn.innerHTML = '<i class="fas fa-eye"></i><span>Exit Stealth</span>';
+            } else {
+            btn.innerHTML = '<i class="fas fa-eye-slash"></i><span>Stealth Mode</span>';
+        }
+    });
+
+    // Panic Button
+    document.getElementById('panicBtn').addEventListener('click', () => {
+        document.getElementById('panicOverlay').classList.add('active');
+        if (isPlaying) toggleLofiBeats(); // Stop music
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.getElementById('panicOverlay').classList.remove('active');
+            document.getElementById('historyModal').classList.remove('active');
+        }
+        // Backtick key for quick panic
+        if (e.key === '`') {
+            const panicOverlay = document.getElementById('panicOverlay');
+            if (panicOverlay.classList.contains('active')) {
+                panicOverlay.classList.remove('active');
+            } else {
+                panicOverlay.classList.add('active');
+                if (isPlaying) toggleLofiBeats();
+            }
+        }
+    });
+
+    // History Modal
+    document.getElementById('historyBtn').addEventListener('click', () => {
+        const historyModal = document.getElementById('historyModal');
+        const historyList = document.getElementById('historyList');
+        
+        historyList.innerHTML = '';
+        
+        if (lastPlayedGames.length === 0) {
+            historyList.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px;">No games played yet!</p>';
+        } else {
+            lastPlayedGames.forEach(game => {
+                const gameData = allGames.find(g => g.name === game.title);
+                if (!gameData) return;
+                
+                const timeAgo = getTimeAgo(game.timestamp);
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                item.innerHTML = `
+                    <div class="history-item-info">
+                        <span class="history-item-name">${game.title}</span>
+                        <span class="history-item-time">${timeAgo}</span>
+                    </div>
+                    <i class="fas fa-play history-item-play"></i>
+                `;
+                item.addEventListener('click', () => {
+                    const gameWin = window.open(gameData.folder + '/index.html', '_blank');
+                    startGameTimer(game.title, gameWin);
+                    trackPlayedGame(game.title);
+                    historyModal.classList.remove('active');
+                });
+                historyList.appendChild(item);
+            });
+        }
+        
+        historyModal.classList.add('active');
+    });
+
+    document.getElementById('closeHistoryBtn').addEventListener('click', () => {
+        document.getElementById('historyModal').classList.remove('active');
+    });
+
+    function getTimeAgo(timestamp) {
+        const seconds = Math.floor((Date.now() - timestamp) / 1000);
+        if (seconds < 60) return 'Just now';
+        const minutes = Math.floor(seconds / 60);
+        if (minutes < 60) return `${minutes}m ago`;
+        const hours = Math.floor(minutes / 60);
+        if (hours < 24) return `${hours}h ago`;
+        const days = Math.floor(hours / 24);
+        return `${days}d ago`;
+    }
+
+    // Settings toggles
+    document.getElementById('particlesToggle').addEventListener('change', (e) => {
+        document.body.classList.toggle('no-particles', !e.target.checked);
+    });
+
+    document.getElementById('animationsToggle').addEventListener('change', (e) => {
+        document.body.classList.toggle('no-animations', !e.target.checked);
+    });
+
     // ===== INITIAL LOAD =====
     generateGameCards();
     updateFavoritesGrid();
