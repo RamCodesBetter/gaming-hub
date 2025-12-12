@@ -1,432 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="The Best Website For Unblocked Games!">
-        <meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,RammyBoi's Game Hub,RammyBoi's Unblocked Games,RammyBoi's Games Unblocked">
-        <meta name="author" content="RammyBoi">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>RammyBoi's Game Hub</title>
-        <link rel="icon" type="image/png" href="resources/favicon-96x96.png" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="resources/favicon.svg" />
-        <link rel="shortcut icon" href="resources/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="resources/apple-touch-icon.png" />
-        <meta name="apple-mobile-web-app-title" content="Gaming Hub" />
-        <link rel="manifest" href="resources/site.webmanifest" />
-        <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    </head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="The Best Website For Unblocked Games!">
+    <meta name="keywords" content="Games,Unblocked Games,Unity,WebGL,Unblocked,Google Sites,RammyBoi's Game Hub,RammyBoi's Unblocked Games,RammyBoi's Games Unblocked">
+    <meta name="author" content="RammyBoi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <title>RammyBoi's Game Hub</title>
+    <link rel="icon" type="image/png" href="resources/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="resources/favicon.svg" />
+    <link rel="shortcut icon" href="resources/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="resources/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Gaming Hub" />
+    <link rel="manifest" href="resources/site.webmanifest" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  </head>
 
-      <body>
-        <div id="fpsCounter">FPS: 60</div>
-        <div class="heading">
-          <h1>RammyBoi's Game Hub</h1>
-          <div class="search-container">
-              <div class="search-wrapper">
-                  <input type="text" id="searchBar" placeholder="What's your next play?">
-                  <button id="randomGameBtn" class="random-btn" title="Play a random game">
-                      <i class="fas fa-random"></i>
-                  </button>
-                  <button id="fullscreenBtn" class="fullscreen-btn" title="Toggle fullscreen">
-                      <i class="fas fa-expand"></i>
-                  </button>
+  <body>
+    <!-- Animated Cyber Background -->
+    <div class="cyber-bg">
+      <div class="cyber-grid"></div>
+      <div class="floating-orb orb-1"></div>
+      <div class="floating-orb orb-2"></div>
+      <div class="floating-orb orb-3"></div>
+      <div class="hex-pattern"></div>
+      <canvas id="particleCanvas"></canvas>
+    </div>
+
+    <!-- Ambient Glow Effects -->
+    <div class="ambient-light light-top"></div>
+    <div class="ambient-light light-bottom"></div>
+
+    <!-- Scanlines Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-backdrop"></div>
+      <div class="header-content">
+        <div class="header-top">
+          <div class="brand">
+            <div class="logo-wrapper">
+              <div class="logo-outer-ring"></div>
+              <div class="logo-inner-ring"></div>
+              <div class="logo-core">
+                <span>RB</span>
               </div>
+              <div class="logo-pulse"></div>
+            </div>
+            <div class="brand-info">
+              <div class="brand-tag">
+                <span class="status-dot"></span>
+                <span>ARCADE VAULT</span>
+              </div>
+              <h1 class="brand-title" data-text="RammyBoi's Game Hub">RammyBoi's Game Hub</h1>
+              <p class="brand-subtitle">300+ Unblocked Games · Live Stats · Chill Beats</p>
+            </div>
           </div>
-          <div class="category-nav">
-              <button class="category-btn active" data-category="all">All Games</button>
-              <button class="category-btn" data-category="Action">Action</button>
-              <button class="category-btn" data-category="Puzzle">Puzzle</button>
-              <button class="category-btn" data-category="Sports">Sports</button>
-              <button class="category-btn" data-category="Adventure">Adventure</button>
+          
+          <div class="header-right">
+            <div class="live-clock">
+              <div class="clock-time" id="clockTime">00:00:00</div>
+              <div class="clock-date" id="clockDate">Loading...</div>
+            </div>
           </div>
         </div>
-        <br><br><br><br>
+
+        <!-- Stats Dashboard -->
+        <div class="stats-dashboard">
+          <div class="stat-card" data-stat="games">
+            <div class="stat-icon">
+              <i class="fas fa-gamepad"></i>
+              <div class="stat-icon-glow"></div>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number" id="statTotalGames">0</span>
+              <span class="stat-label">Total Games</span>
+            </div>
+          </div>
+          <div class="stat-card" data-stat="favorites">
+            <div class="stat-icon">
+              <i class="fas fa-star"></i>
+              <div class="stat-icon-glow"></div>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number" id="statFavorites">0</span>
+              <span class="stat-label">Favorites</span>
+            </div>
+          </div>
+          <div class="stat-card" data-stat="time">
+            <div class="stat-icon">
+              <i class="fas fa-clock"></i>
+              <div class="stat-icon-glow"></div>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number" id="statTotalTime">0h 0m</span>
+              <span class="stat-label">Time Played</span>
+            </div>
+          </div>
+          <div class="stat-card" data-stat="recent">
+            <div class="stat-icon">
+              <i class="fas fa-history"></i>
+              <div class="stat-icon-glow"></div>
+            </div>
+            <div class="stat-content">
+              <span class="stat-number" id="statLastPlayed">—</span>
+              <span class="stat-label">Last Played</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+          <div class="search-box">
+            <div class="search-glow"></div>
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchBar" placeholder="Search 300+ games..." autocomplete="off">
+            <div class="search-controls">
+              <button id="randomGameBtn" class="control-btn" title="Random Game">
+                <i class="fas fa-dice"></i>
+                <span class="control-tooltip">Random</span>
+              </button>
+              <button id="musicToggleBtn" class="control-btn" title="Toggle Music">
+                <i class="fas fa-music"></i>
+                <span class="control-tooltip">Music</span>
+              </button>
+              <button id="fullscreenBtn" class="control-btn" title="Fullscreen">
+                <i class="fas fa-expand"></i>
+                <span class="control-tooltip">Fullscreen</span>
+              </button>
+            </div>
+          </div>
+          <div class="search-shortcuts">
+            <span><kbd>⌘</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>L</kbd> for Lofi Beats</span>
+          </div>
+        </div>
+
+        <!-- Category Navigation -->
+        <nav class="category-nav">
+          <button class="category-pill active" data-category="all">
+            <i class="fas fa-layer-group"></i>
+            <span>All Games</span>
+          </button>
+          <button class="category-pill" data-category="Action">
+            <i class="fas fa-bolt"></i>
+            <span>Action</span>
+          </button>
+          <button class="category-pill" data-category="Casual">
+            <i class="fas fa-gamepad"></i>
+            <span>Casual</span>
+          </button>
+          <button class="category-pill" data-category="Driving">
+            <i class="fas fa-car"></i>
+            <span>Driving</span>
+          </button>
+          <button class="category-pill" data-category="Strategy">
+            <i class="fas fa-chess"></i>
+            <span>Strategy</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-layout">
+      <!-- Left Sidebar -->
+      <aside class="sidebar sidebar-left">
+        <div class="panel favorites-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-star"></i>
+              <span>Favorites</span>
+            </div>
+            <span class="panel-badge">Pinned</span>
+          </div>
+          <div class="panel-body">
+            <div class="favorites-list" id="favoritesGrid"></div>
+          </div>
+        </div>
+
+        <div class="panel playtime-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-chart-pie"></i>
+              <span>Play Time</span>
+            </div>
+            <span class="panel-badge live">
+              <span class="live-indicator"></span>
+              Live
+            </span>
+          </div>
+          <div class="panel-body">
+            <div class="playtime-display">
+              <div class="playtime-circle">
+                <svg viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="42" class="circle-bg"/>
+                  <circle cx="50" cy="50" r="42" class="circle-progress" id="playtimeRing"/>
+                </svg>
+                <div class="playtime-value" id="totalPlaytime">00:00:00</div>
+              </div>
+            </div>
+            <div class="playtime-stats">
+              <h4>Top Games</h4>
+              <div class="playtime-list" id="gamePlaytimeList"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Games Grid -->
+      <section class="games-section">
+        <div class="section-header">
+          <div class="section-title">
+            <span class="title-tag">Browse</span>
+            <h2>All Games</h2>
+          </div>
+          <div class="view-toggle">
+            <button class="view-btn active" data-view="grid">
+              <i class="fas fa-th"></i>
+            </button>
+            <button class="view-btn" data-view="list">
+              <i class="fas fa-list"></i>
+            </button>
+          </div>
+        </div>
         
-        <div class="content-wrapper">
-          <div class="left-sidebar">
-            <div class="favorites-section">
-                <h2>Favorites</h2>
-                <div class="favorites-grid" id="favoritesGrid"></div>
+        <div class="games-grid" id="gamesGrid">
+          <!-- Games will be dynamically loaded by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Right Sidebar -->
+      <aside class="sidebar sidebar-right">
+        <div class="panel recommendations-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-wand-magic-sparkles"></i>
+              <span>For You</span>
             </div>
-            <div class="playtime-section">
-                <h2>Play Time Stats</h2>
-                <div class="total-playtime">
-                    <h3>Total Time Played</h3>
-                    <p id="totalPlaytime">00:00:00</p>
-                </div>
-                <div class="game-playtime">
-                    <h3>Per Game Stats</h3>
-                    <div id="gamePlaytimeList"></div>
-                </div>
-            </div>
+            <span class="panel-badge">AI Picks</span>
           </div>
-          <div class="main-content">
-              <div class="games-grid">
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="1/index.html">1</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="1v1.lol/index.html">1v1.LOL</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="10minutestilldawn/index.html">10 Minutes Till Dawn</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="2048/index.html">2048</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="adanceoffireandice/index.html">A Dance of Fire And Ice</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="adarkroom/index.html">A Dark Room</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="adrenalinechallenge/index.html">Adrenaline Challenge</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="adventuredrivers/index.html">Adventure Drivers</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="asteroids/index.html">Asteroids</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="astray/index.html">Astray</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="backcountry/index.html">Backcountry</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="badicecream/index.html">Bad Ice Cream</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="badicecream2/index.html">Bad Ice Cream 2</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="badicecream3/index.html">Bad Ice Cream 3</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="basketrandom/index.html">Basket Random</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="bitlife/index.html">BitLife</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="bounceback/index.html">Bounceback</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="boxingrandom/index.html">Boxing Random</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="breaklock/index.html">BreakLock</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="breakout/index.html">Breakout</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="chess/index.html">Chess</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="chromedino/index.html">Chrome Dino</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="connect3/index.html">Connect 3</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="cookieclicker/index.html">Cookie Clicker</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="cubefield/index.html">Cubefield</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="doodlejump/index.html">Doodle Jump</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="ducklife/index.html">Duck Life</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="ducklife2/index.html">Duck Life 2</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="ducklife3/index.html">Duck Life 3</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="ducklife4/index.html">Duck Life 4</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="edgesurf/index.html">Edge Surf</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="evilglitch/index.html">Evil Glitch</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="factoryballsforever/index.html">Factory Balls Forever</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="fireboyandwatergirlintheforesttemple/index.html">Fireboy and Watergirl in the Forest Temple</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="flappybird/index.html">Flappy Bird</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="friendlyfire/index.html">Friendly Fire</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="geometrydash/index.html">Geometry Dash</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="gopherkart/index.html">Gopher Kart</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="hextris/index.html">Hextris</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="iceagebabyadventure/index.html">Ice Age Baby Adventure</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="jumpingfrogspuzzle/index.html">Jumping frogs puzzle</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="konnekt/index.html">Konnekt</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="minecraft0.30/index.html">Minecraft 0.30</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="minecraft1.3/index.html">Minecraft 1.3</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="minecraft1.5.2/index.html">Minecraft 1.5.2</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="motox3m2/index.html">Moto X3M 2</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="ovo/index.html">OvO</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="pacman/index.html">Pac-Man</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="polytrack/index.html">Polytrack</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="pushback/index.html">Pushback</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="racer/index.html">Racer</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="radiusraid/index.html">Radius Raid</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="retrobowl/index.html">Retro Bowl</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="retrohaunt/index.html">Retrohaunt</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="riddleschool/index.html">Riddle School</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="riddleschool2/index.html">Riddle School 2</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="riddleschool3/index.html">Riddle School 3</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="riddleschool4/index.html">Riddle School 4</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="riddleschool5/index.html">Riddle School 5</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="roadblocks/index.html">Roadblocks</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="sleepingbeauty/index.html">Sleeping Beauty</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="slope/index.html">Slope</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="snake/index.html">Snake</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="snowrider3d/index.html">Snow Rider 3D</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="soccerrandom/index.html">Soccer Random</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="spacecompany/index.html">Space Company</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="spaceinvaders/index.html">Space Invaders</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="tetris/index.html">Tetris</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="thechromaincident/index.html">The Chroma Incident</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="thereisnogame/index.html">THERE IS NO GAME!</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="towermaster/index.html">Tower Master</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="tunnelrush/index.html">Tunnel Rush</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="underrun/index.html">Under Run</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="vex3/index.html">Vex 3</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="vex4/index.html">Vex 4</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="vex5/index.html">Vex 5</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="vex6/index.html">Vex 6</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="vex7/index.html">Vex 7</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="volleyrandom/index.html">Volley Random</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="webretro/index.html">Webretro (retro console emulator)</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="worldshardestgame/index.html">World's Hardest Game</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="worldshardestgame2/index.html">World's Hardest Game 2</a>
-                  </div>
-                  <div class="game-tile">
-                    <i class="favorite-star far fa-star"></i>
-                    <a href="xx142b2.exe/index.html">xx142-b2.exe</a>
-                  </div>
-                </div>
-            </div>
-            <div class="right-sidebar">
-              <div class="similar-games-section">
-                  <h2>Similar Games</h2>
-                  <div class="similar-games-grid" id="similarGamesGrid"></div>
-              </div>
-            </div>
+          <div class="panel-body">
+            <div class="recommendations-list" id="similarGamesGrid"></div>
+          </div>
         </div>
 
-        <footer>
-            <div class="footer">
-              <button id="resetStatsBtn">Reset All Stats</button>
-              <br>
-              Press &#8984; + &#8997; + &#8679; + L or CTRL + ALT + SHIFT + L For Chill Music
-
-              <div id="musicContainer">
-                <p id="musicLog">
-                  Not Playing
-                </p>
-              </div>
-
-              <div id="music">
-                <br>
-                Colorful Flowers by Tokyo Music Walker | https://soundcloud.com/user-356546060
-                <br>
-                Music promoted by https://www.chosic.com/free-music/all/
-                <br>
-                Creative Commons CC BY 3.0 | https://creativecommons.org/licenses/by/3.0/
-              </div>
+        <div class="panel music-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-headphones"></i>
+              <span>Now Playing</span>
             </div>
-        </footer>
+            <span class="panel-badge" id="musicStatus">Off</span>
+          </div>
+          <div class="panel-body">
+            <div class="music-visualizer" id="musicVisualizer">
+              <div class="viz-bar"></div>
+              <div class="viz-bar"></div>
+              <div class="viz-bar"></div>
+              <div class="viz-bar"></div>
+              <div class="viz-bar"></div>
+              <div class="viz-bar"></div>
+              <div class="viz-bar"></div>
+            </div>
+            <div class="music-info">
+              <p class="music-track" id="musicLog">Click music button to start</p>
+              <p class="music-artist">Colorful Flowers · Tokyo Music Walker</p>
+            </div>
+          </div>
+        </div>
 
-        <script src="script.js"></script>
-      </body>
+        <div class="panel settings-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-sliders"></i>
+              <span>Settings</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <button id="resetStatsBtn" class="reset-btn">
+              <i class="fas fa-rotate-left"></i>
+              <span>Reset All Progress</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- FPS Counter -->
+    <div id="fpsCounter" class="fps-display">
+      <i class="fas fa-gauge-high"></i>
+      <span id="fpsValue">60</span>
+      <span>FPS</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-glow"></div>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">RB</div>
+          <span>RammyBoi's Game Hub</span>
+        </div>
+        <p class="footer-tagline">Built for uninterrupted play. Zero ads. Maximum fun.</p>
+        <div class="footer-stats">
+          <div class="footer-stat">
+            <i class="fas fa-gamepad"></i>
+            <span>300+ Games</span>
+          </div>
+          <div class="footer-stat">
+            <i class="fas fa-bolt"></i>
+            <span>Instant Load</span>
+          </div>
+          <div class="footer-stat">
+            <i class="fas fa-shield-halved"></i>
+            <span>Ad-Free</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>

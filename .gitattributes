@@ -1,0 +1,4 @@
+action-games-main/** filter=lfs diff=lfs merge=lfs -text
+casual-games-main/** filter=lfs diff=lfs merge=lfs -text
+driving-games-main/** filter=lfs diff=lfs merge=lfs -text
+strategy-games-main/** filter=lfs diff=lfs merge=lfs -text
