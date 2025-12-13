@@ -233,13 +233,24 @@
             <span class="title-tag">Browse</span>
             <h2>All Games</h2>
           </div>
-          <div class="view-toggle">
-            <button class="view-btn active" data-view="grid">
-              <i class="fas fa-th"></i>
-            </button>
-            <button class="view-btn" data-view="list">
-              <i class="fas fa-list"></i>
-            </button>
+          <div class="section-controls">
+            <div class="sort-controls">
+              <label class="sort-label">Sort:</label>
+              <select id="sortSelect" class="sort-select">
+                <option value="alphabetical">Alphabetical</option>
+                <option value="popularity">Most Played</option>
+                <option value="newest">Newest Played</option>
+                <option value="longest">Longest Played</option>
+              </select>
+            </div>
+            <div class="view-toggle">
+              <button class="view-btn active" data-view="grid">
+                <i class="fas fa-th"></i>
+              </button>
+              <button class="view-btn" data-view="list">
+                <i class="fas fa-list"></i>
+              </button>
+            </div>
           </div>
         </div>
         
@@ -300,6 +311,19 @@
             </div>
           </div>
 
+        <div class="panel achievements-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-trophy"></i>
+              <span>Achievements</span>
+            </div>
+            <span class="panel-badge" id="achievementCount">0</span>
+          </div>
+          <div class="panel-body">
+            <div class="achievements-list" id="achievementsList"></div>
+          </div>
+        </div>
+
         <div class="panel recommendations-panel">
           <div class="panel-header">
             <div class="panel-title">
@@ -351,6 +375,10 @@
                 <i class="fas fa-eye-slash"></i>
                 <span>Stealth Mode</span>
               </button>
+              <button class="quick-btn" id="teacherModeBtn" title="Switch to study mode">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Teacher Mode</span>
+              </button>
               <button class="quick-btn" id="panicBtn" title="Quick escape!">
                 <i class="fas fa-door-open"></i>
                 <span>Panic Button</span>
@@ -386,6 +414,13 @@
                   <span class="toggle-slider"></span>
                 </label>
               </div>
+              <div class="setting-item">
+                <span>Notifications</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="notificationsToggle">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -409,6 +444,40 @@
         </div>
         <div class="modal-body">
           <div class="history-list" id="historyList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Teacher Mode Overlay -->
+    <div class="teacher-mode-overlay" id="teacherModeOverlay">
+      <div class="teacher-mode-content">
+        <div class="teacher-header">
+          <h2><i class="fas fa-book"></i> Study Notes</h2>
+          <button class="teacher-close" id="exitTeacherModeBtn">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="teacher-body">
+          <div class="study-section">
+            <h3>Today's Tasks</h3>
+            <ul class="task-list" id="taskList">
+              <li>Complete math homework</li>
+              <li>Read chapter 5 for history</li>
+              <li>Study for science quiz</li>
+            </ul>
+          </div>
+          <div class="study-section">
+            <h3>Notes</h3>
+            <textarea class="notes-textarea" id="studyNotes" placeholder="Write your study notes here..."></textarea>
+          </div>
+          <div class="study-section">
+            <h3>Quick Reference</h3>
+            <div class="reference-links">
+              <a href="#" class="ref-link"><i class="fas fa-calculator"></i> Calculator</a>
+              <a href="#" class="ref-link"><i class="fas fa-book"></i> Dictionary</a>
+              <a href="#" class="ref-link"><i class="fas fa-globe"></i> Research</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

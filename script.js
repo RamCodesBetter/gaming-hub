@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Knives.io', folder: 'action-games-main/knives-io', category: 'Action' },
         { name: 'Leader Strike', folder: 'action-games-main/leader-strike', category: 'Action' },
         { name: 'Mario', folder: 'action-games-main/mario', category: 'Action' },
+        { name: 'Steal A Brainrot', folder: 'https://www.msn.com/en-us/play/games/Steal-Brainrot-Online/cg-9pltx207s22g', category: 'Action' },
 
         // CASUAL GAMES
         { name: 'Doge Miner', folder: 'casual-games-main/DogeMiner', category: 'Casual' },
@@ -379,6 +380,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let isRandomizing = false;
     let gameWindow = null;
 
+    // ===== HELPER: Get game URL =====
+    function getGameUrl(game) {
+        return game.folder.startsWith('http') ? game.folder : `${game.folder}/index.html`;
+    }
+
     // ===== GENERATE GAME CARDS =====
     function generateGameCards() {
         gamesGrid.innerHTML = '';
@@ -390,12 +396,14 @@ document.addEventListener('DOMContentLoaded', function() {
             card.dataset.game = game.name;
             card.dataset.category = game.category;
             
+            const gameUrl = getGameUrl(game);
+            
             card.innerHTML = `
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <button class="favorite-btn ${isFavorite ? 'fas' : 'far'} fa-star"></button>
                 <div class="card-content">
-                    <a href="${game.folder}/index.html">${game.name}</a>
+                    <a href="${gameUrl}">${game.name}</a>
                 </div>
                 <div class="card-hover">
                     <div class="play-btn"><i class="fas fa-play"></i></div>
@@ -598,8 +606,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
                 const favItem = document.createElement('div');
                 favItem.className = 'fav-item';
+                const favGameUrl = getGameUrl(game);
                 favItem.innerHTML = `
-                <a href="${game.folder}/index.html" class="fav-link">${gameTitle}</a>
+                <a href="${favGameUrl}" class="fav-link">${gameTitle}</a>
                     <i class="fas fa-star fav-star" data-game="${gameTitle}"></i>
                 `;
                 favItem.style.cssText = `
@@ -651,8 +660,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 favLink.addEventListener('click', (e) => {
                     e.preventDefault();
-                const gameWin = window.open(game.folder + '/index.html', '_blank');
-                startGameTimer(gameTitle, gameWin);
+                    const gameWin = window.open(getGameUrl(game), '_blank');
+                    startGameTimer(gameTitle, gameWin);
                     trackPlayedGame(gameTitle);
                 });
                 
@@ -767,8 +776,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     const game = allGames.find(g => g.name === finalGame);
                     if (game) {
-                            trackPlayedGame(finalGame);
-                        const gameWin = window.open(game.folder + '/index.html', '_blank');
+                        trackPlayedGame(finalGame);
+                        const gameWin = window.open(getGameUrl(game), '_blank');
                         startGameTimer(finalGame, gameWin);
                     }
                     randomGameBtn.classList.remove('spinning');
@@ -799,6 +808,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (lastPlayedGames.length > 5) lastPlayedGames.pop();
         
         localStorage.setItem('lastPlayedGames', JSON.stringify(lastPlayedGames));
+        incrementPlayCount(gameTitle);
+        updateDailyStreak();
+        checkAchievements();
         updateSimilarGames();
         updateStatsRibbon();
     }
@@ -810,19 +822,88 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!lastPlayedGames.length || typeof lastPlayedGames[0] !== 'object') return;
 
         const lastPlayed = lastPlayedGames[0].title;
-        const similarGames = findSimilarGames(lastPlayed);
+        const lastGame = allGames.find(g => g.name === lastPlayed);
+        if (!lastGame) return;
 
-        if (similarGames.length === 0) return;
+        const gamePlayTimes = JSON.parse(localStorage.getItem('gamePlayTimes') || '{}');
+        const gamePlayCounts = JSON.parse(localStorage.getItem('gamePlayCounts') || '{}');
+        
+        // Enhanced AI recommendations with scoring
+        const scoredGames = allGames
+            .filter(g => g.name !== lastPlayed && g.category === lastGame.category)
+            .map(g => ({
+                game: g,
+                score: (gamePlayTimes[g.name] || 0) / 60 + // Playtime in minutes
+                       (gamePlayCounts[g.name] || 0) * 5 + // Play count bonus
+                       (favorites.includes(g.name) ? 10 : 0) // Favorite bonus
+            }))
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 4);
+
+        if (scoredGames.length === 0) {
+            // Fallback to simple category match
+            const similarGames = findSimilarGames(lastPlayed);
+            if (similarGames.length === 0) return;
+            
+            const basedOnText = document.createElement('p');
+            basedOnText.style.cssText = 'font-size: 10px; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 1px;';
+            basedOnText.textContent = `Based on: ${lastPlayed}`;
+            similarGamesGrid.appendChild(basedOnText);
+
+            similarGames.forEach((game, index) => {
+                const gameData = allGames.find(g => g.name === game.title);
+                if (!gameData) return;
+                
+                const gameDiv = document.createElement('div');
+                gameDiv.style.cssText = `
+                    padding: 10px;
+                    background: rgba(0, 212, 255, 0.06);
+                    border: 1px solid rgba(0, 212, 255, 0.12);
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    opacity: 0;
+                    transform: translateY(10px);
+                    margin-bottom: 8px;
+                `;
+                
+                gameDiv.innerHTML = `
+                    <span style="padding: 2px 6px; background: rgba(0, 212, 255, 0.1); border-radius: 10px; font-size: 9px; color: var(--neon-primary);">${game.category}</span>
+                    <span style="display: block; margin-top: 6px; color: var(--text-primary); font-size: 11px;">${game.title}</span>
+                `;
+                
+                setTimeout(() => {
+                    gameDiv.style.opacity = '1';
+                    gameDiv.style.transform = 'translateY(0)';
+                }, index * 80);
+                
+                gameDiv.addEventListener('mouseenter', () => {
+                    gameDiv.style.borderColor = 'rgba(0, 212, 255, 0.3)';
+                    gameDiv.style.transform = 'translateX(5px)';
+                });
+                
+                gameDiv.addEventListener('mouseleave', () => {
+                    gameDiv.style.borderColor = 'rgba(0, 212, 255, 0.12)';
+                    gameDiv.style.transform = 'translateX(0)';
+                });
+                
+            gameDiv.addEventListener('click', () => {
+                const gameWin = window.open(getGameUrl(gameData), '_blank');
+                startGameTimer(game.title, gameWin);
+                trackPlayedGame(game.title);
+            });
+                
+                similarGamesGrid.appendChild(gameDiv);
+            });
+            return;
+        }
 
         const basedOnText = document.createElement('p');
         basedOnText.style.cssText = 'font-size: 10px; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 1px;';
         basedOnText.textContent = `Based on: ${lastPlayed}`;
         similarGamesGrid.appendChild(basedOnText);
 
-        similarGames.forEach((game, index) => {
-            const gameData = allGames.find(g => g.name === game.title);
-            if (!gameData) return;
-            
+        scoredGames.forEach((item, index) => {
             const gameDiv = document.createElement('div');
             gameDiv.style.cssText = `
                 padding: 10px;
@@ -833,11 +914,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 transition: all 0.2s ease;
                 opacity: 0;
                 transform: translateY(10px);
+                margin-bottom: 8px;
             `;
             
+            const isPopular = (gamePlayCounts[item.game.name] || 0) > 0 || (gamePlayTimes[item.game.name] || 0) > 300;
+            
             gameDiv.innerHTML = `
-                <span style="padding: 2px 6px; background: rgba(0, 212, 255, 0.1); border-radius: 10px; font-size: 9px; color: var(--neon-primary);">${game.category}</span>
-                <span style="display: block; margin-top: 6px; color: var(--text-primary); font-size: 11px;">${game.title}</span>
+                <span style="padding: 2px 6px; background: rgba(0, 212, 255, 0.1); border-radius: 10px; font-size: 9px; color: var(--neon-primary);">${item.game.category}</span>
+                <span style="display: block; margin-top: 6px; color: var(--text-primary); font-size: 11px;">${item.game.name}</span>
+                ${isPopular ? '<span style="display: block; margin-top: 4px; color: var(--text-muted); font-size: 9px;">⭐ Popular</span>' : ''}
             `;
             
             setTimeout(() => {
@@ -856,9 +941,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             gameDiv.addEventListener('click', () => {
-                const gameWin = window.open(gameData.folder + '/index.html', '_blank');
-                startGameTimer(game.title, gameWin);
-                trackPlayedGame(game.title);
+                const gameWin = window.open(getGameUrl(item.game), '_blank');
+                startGameTimer(item.game.name, gameWin);
+                trackPlayedGame(item.game.name);
             });
             
             similarGamesGrid.appendChild(gameDiv);
@@ -1084,11 +1169,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== RESET STATS =====
     document.getElementById('resetStatsBtn').addEventListener('click', () => {
-        if (confirm('Are you sure you want to reset all stats and progress?')) {
+        if (confirm('Are you sure you want to reset all stats and progress? This will also reset all achievements.')) {
             localStorage.clear();
             gamePlayTimes = {};
             favorites = [];
             lastPlayedGames = [];
+            
+            // Reset achievements
+            achievements = {};
+            dailyStreak = 0;
+            lastPlayDate = null;
+            totalXP = 0;
 
             document.getElementById('totalPlaytime').textContent = '00:00:00';
             document.getElementById('gamePlaytimeList').innerHTML = '';
@@ -1098,6 +1189,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateSimilarGames();
             updateStatsRibbon();
             updatePlayTimeDisplay();
+            updateAchievementsDisplay();
         }
     });
 
@@ -1422,7 +1514,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <i class="fas fa-play history-item-play"></i>
                 `;
                 item.addEventListener('click', () => {
-                    const gameWin = window.open(gameData.folder + '/index.html', '_blank');
+                    const gameWin = window.open(getGameUrl(gameData), '_blank');
                     startGameTimer(game.title, gameWin);
                     trackPlayedGame(game.title);
                     historyModal.classList.remove('active');
@@ -1458,9 +1550,381 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.toggle('no-animations', !e.target.checked);
     });
 
+    // ===== ADVANCED SORTING =====
+    let currentSort = localStorage.getItem('gameSort') || 'alphabetical';
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) {
+        sortSelect.value = currentSort;
+        sortSelect.addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            localStorage.setItem('gameSort', currentSort);
+            sortGames();
+        });
+    }
+
+    function sortGames() {
+        const cards = Array.from(document.querySelectorAll('.game-card'));
+        const gamePlayTimes = JSON.parse(localStorage.getItem('gamePlayTimes') || '{}');
+        const gamePlayCounts = JSON.parse(localStorage.getItem('gamePlayCounts') || '{}');
+        
+        cards.sort((a, b) => {
+            const gameA = a.dataset.game;
+            const gameB = b.dataset.game;
+            
+            switch(currentSort) {
+                case 'popularity':
+                    const countA = gamePlayCounts[gameA] || 0;
+                    const countB = gamePlayCounts[gameB] || 0;
+                    return countB - countA;
+                    
+                case 'newest':
+                    const gameAHistory = lastPlayedGames.find(g => g.title === gameA);
+                    const gameBHistory = lastPlayedGames.find(g => g.title === gameB);
+                    const timeA = gameAHistory ? gameAHistory.timestamp : 0;
+                    const timeB = gameBHistory ? gameBHistory.timestamp : 0;
+                    return timeB - timeA;
+                    
+                case 'longest':
+                    const timeA_sec = gamePlayTimes[gameA] || 0;
+                    const timeB_sec = gamePlayTimes[gameB] || 0;
+                    return timeB_sec - timeA_sec;
+                    
+                default: // alphabetical
+                    return gameA.localeCompare(gameB);
+            }
+        });
+        
+        const grid = document.getElementById('gamesGrid');
+        cards.forEach((card, index) => {
+            grid.appendChild(card);
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 10);
+        });
+    }
+
+    // Track play counts for popularity
+    function incrementPlayCount(gameTitle) {
+        const counts = JSON.parse(localStorage.getItem('gamePlayCounts') || '{}');
+        counts[gameTitle] = (counts[gameTitle] || 0) + 1;
+        localStorage.setItem('gamePlayCounts', JSON.stringify(counts));
+    }
+
+    // ===== ACHIEVEMENTS SYSTEM =====
+    let achievements = JSON.parse(localStorage.getItem('achievements') || '{}');
+    let dailyStreak = parseInt(localStorage.getItem('dailyStreak') || '0');
+    let lastPlayDate = localStorage.getItem('lastPlayDate');
+    let totalXP = parseInt(localStorage.getItem('totalXP') || '0');
+
+    const achievementDefinitions = [
+        { id: 'first_game', name: 'First Steps', desc: 'Play your first game', icon: 'fa-star', xp: 10, check: () => Object.keys(gamePlayTimes).length > 0 },
+        { id: 'play_10', name: 'Getting Started', desc: 'Play 10 different games', icon: 'fa-gamepad', xp: 25, check: () => Object.keys(gamePlayTimes).length >= 10 },
+        { id: 'play_50', name: 'Explorer', desc: 'Play 50 different games', icon: 'fa-compass', xp: 50, check: () => Object.keys(gamePlayTimes).length >= 50 },
+        { id: 'play_100', name: 'Master Explorer', desc: 'Play 100 different games', icon: 'fa-globe', xp: 100, check: () => Object.keys(gamePlayTimes).length >= 100 },
+        { id: 'time_1h', name: 'Hour Warrior', desc: 'Play for 1 hour total', icon: 'fa-clock', xp: 30, check: () => {
+            const total = Object.values(gamePlayTimes).reduce((a, b) => a + b, 0);
+            return total >= 3600;
+        }},
+        { id: 'time_10h', name: 'Time Master', desc: 'Play for 10 hours total', icon: 'fa-hourglass', xp: 100, check: () => {
+            const total = Object.values(gamePlayTimes).reduce((a, b) => a + b, 0);
+            return total >= 36000;
+        }},
+        { id: 'streak_3', name: 'Consistent', desc: 'Play 3 days in a row', icon: 'fa-fire', xp: 25, check: () => dailyStreak >= 3 },
+        { id: 'streak_7', name: 'Dedicated', desc: 'Play 7 days in a row', icon: 'fa-fire', xp: 50, check: () => dailyStreak >= 7 },
+        { id: 'streak_30', name: 'Unstoppable', desc: 'Play 30 days in a row', icon: 'fa-fire', xp: 200, check: () => dailyStreak >= 30 },
+        { id: 'genre_all', name: 'Variety Seeker', desc: 'Play games from all categories', icon: 'fa-layer-group', xp: 75, check: () => {
+            const playedCategories = new Set();
+            Object.keys(gamePlayTimes).forEach(gameTitle => {
+                const game = allGames.find(g => g.name === gameTitle);
+                if (game) playedCategories.add(game.category);
+            });
+            return playedCategories.size >= 4;
+        }},
+        { id: 'favorite_10', name: 'Collector', desc: 'Favorite 10 games', icon: 'fa-heart', xp: 20, check: () => favorites.length >= 10 },
+        { id: 'favorite_25', name: 'Curator', desc: 'Favorite 25 games', icon: 'fa-heart', xp: 50, check: () => favorites.length >= 25 }
+    ];
+
+    function checkAchievements() {
+        const currentGamePlayTimes = JSON.parse(localStorage.getItem('gamePlayTimes') || '{}');
+        const currentGamePlayCounts = JSON.parse(localStorage.getItem('gamePlayCounts') || '{}');
+        let newAchievements = false;
+        achievementDefinitions.forEach(achievement => {
+            if (!achievements[achievement.id]) {
+                // Create a check function with access to current data
+                let checkResult = false;
+                try {
+                    if (achievement.id === 'first_game') {
+                        // Check gamePlayCounts instead of gamePlayTimes since it's updated immediately
+                        checkResult = Object.keys(currentGamePlayCounts).length >= 1;
+                    } else if (achievement.id === 'play_10' || achievement.id === 'play_50' || achievement.id === 'play_100') {
+                        // Use gamePlayCounts for these too since it's more accurate
+                        checkResult = Object.keys(currentGamePlayCounts).length >= (achievement.id === 'play_100' ? 100 : achievement.id === 'play_50' ? 50 : 10);
+                    } else if (achievement.id === 'time_1h' || achievement.id === 'time_10h') {
+                        const total = Object.values(currentGamePlayTimes).reduce((a, b) => a + b, 0);
+                        checkResult = total >= (achievement.id === 'time_10h' ? 36000 : 3600);
+                    } else if (achievement.id === 'streak_3' || achievement.id === 'streak_7' || achievement.id === 'streak_30') {
+                        checkResult = dailyStreak >= (achievement.id === 'streak_30' ? 30 : achievement.id === 'streak_7' ? 7 : 3);
+                    } else if (achievement.id === 'genre_all') {
+                        const playedCategories = new Set();
+                        Object.keys(currentGamePlayCounts).forEach(gameTitle => {
+                            const game = allGames.find(g => g.name === gameTitle);
+                            if (game) playedCategories.add(game.category);
+                        });
+                        checkResult = playedCategories.size >= 4;
+                    } else if (achievement.id === 'favorite_10' || achievement.id === 'favorite_25') {
+                        checkResult = favorites.length >= (achievement.id === 'favorite_25' ? 25 : 10);
+                    } else {
+                        checkResult = achievement.check();
+                    }
+                } catch (e) {
+                    console.error('Achievement check error:', e);
+                }
+                
+                if (checkResult) {
+                    achievements[achievement.id] = {
+                        unlocked: true,
+                        unlockedAt: Date.now(),
+                        xp: achievement.xp
+                    };
+                    totalXP += achievement.xp;
+                    newAchievements = true;
+                    showAchievementNotification(achievement);
+                }
+            }
+        });
+        
+        if (newAchievements) {
+            localStorage.setItem('achievements', JSON.stringify(achievements));
+            localStorage.setItem('totalXP', totalXP.toString());
+            updateAchievementsDisplay();
+        }
+    }
+
+    function updateDailyStreak() {
+        const today = new Date().toDateString();
+        if (lastPlayDate !== today) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            if (lastPlayDate === yesterday.toDateString()) {
+                dailyStreak++;
+            } else {
+                dailyStreak = 1;
+            }
+            lastPlayDate = today;
+            localStorage.setItem('dailyStreak', dailyStreak.toString());
+            localStorage.setItem('lastPlayDate', lastPlayDate);
+        }
+    }
+
+    function showAchievementNotification(achievement) {
+        const notification = document.createElement('div');
+        notification.className = 'achievement-notification';
+        notification.innerHTML = `
+            <div class="achievement-notification-content">
+                <i class="fas ${achievement.icon}"></i>
+                <div>
+                    <strong>${achievement.name}</strong>
+                    <span>+${achievement.xp} XP</span>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.classList.add('show'), 100);
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    function updateAchievementsDisplay() {
+        const achievementsList = document.getElementById('achievementsList');
+        const achievementCount = document.getElementById('achievementCount');
+        if (!achievementsList) return;
+        
+        achievementsList.innerHTML = '';
+        const unlockedCount = Object.values(achievements).filter(a => a.unlocked).length;
+        if (achievementCount) achievementCount.textContent = unlockedCount;
+        
+        if (unlockedCount === 0) {
+            achievementsList.innerHTML = '<p style="text-align:center;color:var(--text-muted);font-size:11px;padding:10px;">No achievements yet. Start playing!</p>';
+            return;
+        }
+
+        achievementDefinitions.forEach(achievement => {
+            const unlocked = achievements[achievement.id];
+            const achievementDiv = document.createElement('div');
+            achievementDiv.className = `achievement-item ${unlocked ? 'unlocked' : 'locked'}`;
+            achievementDiv.innerHTML = `
+                <div class="achievement-icon">
+                    <i class="fas ${achievement.icon}"></i>
+                </div>
+                <div class="achievement-info">
+                    <div class="achievement-name">${achievement.name}</div>
+                    <div class="achievement-desc">${achievement.desc}</div>
+                    ${unlocked ? `<div class="achievement-xp">+${achievement.xp} XP</div>` : ''}
+                </div>
+            `;
+            achievementsList.appendChild(achievementDiv);
+        });
+    }
+
+    // ===== TEACHER MODE =====
+    let teacherModeActive = localStorage.getItem('teacherMode') === 'true';
+    const teacherModeBtn = document.getElementById('teacherModeBtn');
+    const teacherModeOverlay = document.getElementById('teacherModeOverlay');
+    const exitTeacherModeBtn = document.getElementById('exitTeacherModeBtn');
+    const studyNotes = document.getElementById('studyNotes');
+
+    // Load saved notes
+    if (studyNotes) {
+        studyNotes.value = localStorage.getItem('studyNotes') || '';
+        studyNotes.addEventListener('input', () => {
+            localStorage.setItem('studyNotes', studyNotes.value);
+        });
+    }
+
+    function toggleTeacherMode() {
+        teacherModeActive = !teacherModeActive;
+        localStorage.setItem('teacherMode', teacherModeActive.toString());
+        
+        if (teacherModeActive) {
+            document.body.classList.add('teacher-mode');
+            if (teacherModeOverlay) teacherModeOverlay.classList.add('active');
+            if (isPlaying) toggleLofiBeats(); // Pause music
+            if (teacherModeBtn) {
+                teacherModeBtn.innerHTML = '<i class="fas fa-graduation-cap"></i><span>Exit Study Mode</span>';
+                teacherModeBtn.classList.add('active');
+            }
+        } else {
+            document.body.classList.remove('teacher-mode');
+            if (teacherModeOverlay) teacherModeOverlay.classList.remove('active');
+            if (teacherModeBtn) {
+                teacherModeBtn.innerHTML = '<i class="fas fa-chalkboard-teacher"></i><span>Teacher Mode</span>';
+                teacherModeBtn.classList.remove('active');
+            }
+        }
+    }
+
+    if (teacherModeBtn) {
+        teacherModeBtn.addEventListener('click', toggleTeacherMode);
+    }
+    if (exitTeacherModeBtn) {
+        exitTeacherModeBtn.addEventListener('click', toggleTeacherMode);
+    }
+
+    // Initialize teacher mode if it was active
+    if (teacherModeActive) {
+        document.body.classList.add('teacher-mode');
+        if (teacherModeOverlay) teacherModeOverlay.classList.add('active');
+    }
+
+    // ===== NOTIFICATIONS =====
+    // Default to true if not set in localStorage
+    let notificationsEnabled = localStorage.getItem('notificationsEnabled') !== 'false';
+    const notificationsToggle = document.getElementById('notificationsToggle');
+    
+    if (notificationsToggle) {
+        notificationsToggle.checked = notificationsEnabled;
+        // Update localStorage to reflect default state
+        if (localStorage.getItem('notificationsEnabled') === null) {
+            localStorage.setItem('notificationsEnabled', 'true');
+        }
+        notificationsToggle.addEventListener('change', async (e) => {
+            notificationsEnabled = e.target.checked;
+            localStorage.setItem('notificationsEnabled', notificationsEnabled.toString());
+            
+            if (notificationsEnabled && Notification.permission === 'default') {
+                const permission = await Notification.requestPermission();
+                if (permission !== 'granted') {
+                    notificationsEnabled = false;
+                    notificationsToggle.checked = false;
+                    localStorage.setItem('notificationsEnabled', 'false');
+                }
+            }
+        });
+    }
+
+    // Request notification permission on load if enabled
+    if (notificationsEnabled) {
+        if (Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+    }
+
+    function sendNotification(title, body, icon = '🎮') {
+        if (!notificationsEnabled || Notification.permission !== 'granted') return;
+        
+        new Notification(title, {
+            body: body,
+            icon: '/resources/favicon-96x96.png',
+            badge: '/resources/favicon-96x96.png',
+            tag: 'gaming-hub',
+            requireInteraction: false
+        });
+    }
+
+    // Schedule notifications
+    let scheduleNotificationSent = false;
+    let breakNotificationSent = false;
+    let lastBreakNotification = 0;
+
+    function checkScheduleNotifications() {
+        if (!notificationsEnabled) return;
+        
+        const schedule = getCurrentSchedule();
+        if (!schedule) return;
+        
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+        
+        schedule.forEach(period => {
+            if (period.type === 'class' || period.type === 'lunch') {
+                const endMins = timeToMinutes(period.end);
+                const timeUntilEnd = endMins - currentMinutes;
+                
+                // Notify 2 minutes before class ends
+                if (timeUntilEnd > 0 && timeUntilEnd <= 2 && timeUntilEnd > 1.5 && !scheduleNotificationSent) {
+                    sendNotification('⏰ Class Ending Soon', `${period.name} ends in 2 minutes!`);
+                    scheduleNotificationSent = true;
+                    setTimeout(() => { scheduleNotificationSent = false; }, 60000);
+                }
+            }
+        });
+    }
+
+    function checkBreakNotifications() {
+        if (!notificationsEnabled) return;
+        
+        const now = Date.now();
+        if (currentGame && gameStartTime) {
+            const playTime = Math.floor((now - gameStartTime) / 1000);
+            const playTimeMinutes = Math.floor(playTime / 60);
+            
+            // Notify every 30 minutes of play
+            if (playTimeMinutes >= 30 && playTimeMinutes % 30 === 0 && 
+                now - lastBreakNotification > 60000) {
+                sendNotification('⏸️ Take a Break', `You've been playing for ${playTimeMinutes} minutes. Time for a break!`);
+                lastBreakNotification = now;
+            }
+        }
+    }
+
+    // Check notifications every minute
+    setInterval(() => {
+        checkScheduleNotifications();
+        checkBreakNotifications();
+    }, 60000);
+
     // ===== INITIAL LOAD =====
     generateGameCards();
     updateFavoritesGrid();
     updateSimilarGames();
     updateStatsRibbon();
+    checkAchievements();
+    updateAchievementsDisplay();
+    sortGames(); // Apply saved sort preference
 });
