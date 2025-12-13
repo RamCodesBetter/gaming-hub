@@ -1,2 +1,2 @@
-# Gamehub
+# Gaming Hub
 This website is for... educational purposes...
