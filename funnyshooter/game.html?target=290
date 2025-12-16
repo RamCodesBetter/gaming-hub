@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5598129470490010"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Y71QM9DR66"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-Y71QM9DR66");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link
+      rel="shortcut icon"
+      href="/logo.png"
+      type="image/x-icon"
+      class="favicon"
+    />
+    <link rel="stylesheet" href="game.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="game-related">
+        <div class="actual" id="gameframe">
+          <iframe src="" frameborder="0" id="game-frame"></iframe>
+          <div class="tool-bar">
+            <div class="more-left">
+              <img src="" id="game-thumb" />
+            </div>
+            <div class="leftest">
+              <h5 class="title" id="game-name"></h5>
+            </div>
+            <img src="/macvg/media/star-regular.svg" id="star" />
+            <img src="/macvg/media/share-solid.svg" id="share" />
+            <img src="/macvg/media/download.svg" id="download" />
+            <img src="/macvg/media/flag.svg" id="report" />
+            <img src="/macvg/media/expand.svg" id="fullscreen" />
+          </div>
+        </div>
+        <div class="more-info">
+          <div class="info">
+            <h3>About</h3>
+            <p id="game-description"></p>
+          </div>
+          <div class="info">
+            <h3>Controls</h3>
+            <ul id="game-controls"></ul>
+          </div>
+          <div class="info">
+            <h3>Game Information</h3>
+            <ul>
+              <li>Developer: <span id="game-developer"></span></li>
+              <li>Category: <span id="game-category"></span></li>
+              <li>Genre: <span id="game-genre"></span></li>
+              <li>Players: <span id="game-popularity"></span></li>
+              <li>Release Date: <span id="game-release"></span></li>
+              <li>Build: <span id="game-build"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="nav">
+          <a href="/macvg/" class="logo">
+            <img src="/macvg/media/macvg-logo.png" alt="" />
+          </a>
+          <div class="links">
+            <a href="/macvg/new.html" class="nav-link">New</a>
+            <a href="/macvg/trending.html" class="nav-link">Trending</a>
+            <a href="/macvg/recent.html" class="nav-link">Recent</a>
+            <a href="/macvg/originals/atomic/" class="nav-link">Atomic</a>
+            <a href="/macvg/originals/macboard/" class="nav-link">MacBoard</a>
+            <a href="/macvg/settings.html" class="nav-link">Settings</a>
+          </div>
+          <div class="copyright">© 2024 <a href="/">MacWeb</a></div>
+        </div>
+        <div class="ad-container">
+          <ins
+            class="adsbygoogle"
+            style="display: block"
+            data-ad-client="ca-pub-5598129470490010"
+            data-ad-slot="3901218615"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+        </div>
+        <div class="side-search">
+          <form class="side-search-input">
+            <input
+              type="text"
+              placeholder="Search 400+ Games"
+              class="side-search-bar"
+              id="sideSearch"
+              autocomplete="off"
+            />
+            <button class="side-search-btn" type="submit">Go</button>
+          </form>
+          <span id="nothing" style="padding-inline: 20px"
+            >Oops, we don't have that game yet. Submit a request
+            <a
+              href="https://forms.gle/UpHgbAmLtUPCD5bs8"
+              target="_blank"
+              style="color: white"
+              id="nothing"
+              >here</a
+            >
+            or find another one!</span
+          >
+          <div class="games-container" id="list"></div>
+        </div>
+      </div>
+    </div>
+    <div class="game-share none" id="game-share">
+      Link copied! You can share it in an email, social media, text, website, or
+      any other place to share the game!
+      <button class="game-share-btn" id="game-share-btn">Done</button>
+    </div>
+    <script>
+      let data,
+        newArray = [];
+      const params = new URLSearchParams(window.location.search);
+      const targetUrl = params.get("target");
+      if (!targetUrl) window.location.href = "/macvg/";
+      const gameName = document.getElementById("game-name");
+      const gameCategory = document.getElementById("game-category");
+      const gameRelease = document.getElementById("game-release");
+      const gameDeveloper = document.getElementById("game-developer");
+      const gamePopularity = document.getElementById("game-popularity");
+      const gameGenre = document.getElementById("game-genre");
+      const gameBuild = document.getElementById("game-build");
+      const gameThumb = document.getElementById("game-thumb");
+      const gameDescription = document.getElementById("game-description");
+      const gameControls = document.getElementById("game-controls");
+      fetch("games.json")
+        .then((response) => response.json())
+        .then((dataa) => {
+          data = dataa.games;
+          for (var i = 0; i < data.length; i++) {
+            newArray.push(data[i]);
+          }
+          newArray.forEach((game) => {
+            if (game.id === parseInt(targetUrl)) {
+              document.getElementById("game-frame").src = game.link;
+              const titleFromStorage = localStorage.getItem("title");
+              if (titleFromStorage && titleFromStorage.trim() !== "") {
+                const pageTitle = document.getElementsByTagName("title")[0];
+                const [title, image] = titleFromStorage.split(",");
+                if (title && image) {
+                  pageTitle.innerHTML = title;
+                  let favicon = document.querySelector(".favicon");
+                  favicon.href = image;
+                }
+              } else {
+                document.getElementsByTagName("title")[0].innerHTML =
+                  game.name + " | MacVG";
+              }
+              gameName.innerHTML = game.name;
+              gameRelease.innerHTML = game.releaseDate;
+              gameDeveloper.innerHTML = game.dev;
+              gameGenre.innerHTML = game.genre;
+              gameBuild.innerHTML = game.build;
+              if (game.about.includes("Oops, you caught us")) {
+                gameDescription.parentElement.style.display = "none";
+              }
+              if (game.controls.includes("Still working on this one O_O")) {
+                gameControls.parentElement.style.display = "none";
+              }
+              gameDescription.innerHTML = game.about;
+              gamePopularity.innerHTML = game.popularity;
+              gameThumb.src = game.link + game.thumb;
+              game.controls.forEach((control) => {
+                const li = document.createElement("li");
+                li.innerHTML = control;
+                gameControls.appendChild(li);
+              });
+              console.log(game.catagory);
+              switch (game.catagory) {
+                case "strategy":
+                  gameCategory.innerHTML = "Strategy and Puzzle";
+                  break;
+                case "action":
+                  gameCategory.innerHTML = "Action and Adventure";
+                  break;
+                case "casual":
+                  gameCategory.innerHTML = "Casual";
+                  break;
+                case "driving":
+                  gameCategory.innerHTML = "Driving and Sports";
+                  break;
+                default:
+                  gameCategory.innerHTML = "Other";
+              }
+            }
+          });
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    </script>
+    <script src="game.js"></script>
+  </body>
+</html>
