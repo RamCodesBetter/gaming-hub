@@ -2154,6 +2154,47 @@ document.addEventListener('DOMContentLoaded', function() {
         checkBreakNotifications();
     }, 60000);
 
+    // ===== ZOOM SETTING =====
+    function applyZoom(zoomLevel) {
+        const zoom = parseFloat(zoomLevel);
+        const body = document.body;
+        
+        // Remove existing zoom styles
+        body.style.zoom = '';
+        body.style.transform = '';
+        body.style.width = '';
+        body.style.minHeight = '';
+        
+        // Apply new zoom
+        if (zoom !== 1.0) {
+            body.style.zoom = zoom;
+            body.style.MozTransform = `scale(${zoom})`;
+            body.style.MozTransformOrigin = '0 0';
+            body.style.WebkitTransform = `scale(${zoom})`;
+            body.style.WebkitTransformOrigin = '0 0';
+            body.style.transform = `scale(${zoom})`;
+            body.style.transformOrigin = '0 0';
+            body.style.width = `${(1 / zoom) * 100}%`;
+            body.style.minHeight = `${(1 / zoom) * 100}vh`;
+        }
+        
+        // Save to localStorage
+        localStorage.setItem('zoomLevel', zoomLevel);
+    }
+    
+    // Load saved zoom preference
+    const savedZoom = localStorage.getItem('zoomLevel') || '1.0';
+    applyZoom(savedZoom);
+    
+    // Set up zoom selector
+    const zoomSelect = document.getElementById('zoomSelect');
+    if (zoomSelect) {
+        zoomSelect.value = savedZoom;
+        zoomSelect.addEventListener('change', (e) => {
+            applyZoom(e.target.value);
+        });
+    }
+
     // ===== INITIAL LOAD =====
     generateGameCards();
     updateFavoritesGrid();
