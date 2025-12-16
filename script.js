@@ -2,358 +2,584 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===== GAME DATA =====
     // All games organized by their source folder and category
     const allGames = [
+        // STRATEGY GAMES
+        { name: '1', folder: '1', category: 'Strategy' },
+
         // ACTION GAMES
-        { name: '10 Minutes Till Dawn', folder: 'action-games-main/10-minutes-till-dawn', category: 'Action' },
-        { name: '1v1.LOL', folder: 'action-games-main/1v1lol', category: 'Action' },
-        { name: 'A Dark Room', folder: 'action-games-main/adarkroom', category: 'Action' },
-        { name: 'Adam & Eve', folder: 'action-games-main/adam-eve', category: 'Action' },
-        { name: 'Adam & Eve 2', folder: 'action-games-main/adam-eve-2', category: 'Action' },
-        { name: 'Alien Hominid', folder: 'action-games-main/alienhominid', category: 'Action' },
-        { name: 'Amidst The Clouds', folder: 'action-games-main/amidst-the-clouds', category: 'Action' },
-        { name: 'Angry Sharks', folder: 'action-games-main/angry-sharks', category: 'Action' },
-        { name: 'Animal.io', folder: 'action-games-main/animal-io', category: 'Action' },
-        { name: 'Apple Shooter', folder: 'action-games-main/apple-shooter', category: 'Action' },
-        { name: 'Aquapark.io', folder: 'action-games-main/aquapark-io', category: 'Action' },
-        { name: 'Arcane Archer', folder: 'action-games-main/arcane-archer', category: 'Action' },
-        { name: 'Archers.io', folder: 'action-games-main/archers-io', category: 'Action' },
-        { name: 'Avalanche', folder: 'action-games-main/avalanche', category: 'Action' },
-        { name: 'Awesome Tanks 2', folder: 'action-games-main/awesome-tanks-2', category: 'Action' },
-        { name: 'Backrooms', folder: 'action-games-main/backrooms', category: 'Action' },
-        { name: 'Backrooms 2D', folder: 'action-games-main/backrooms-2d', category: 'Action' },
-        { name: 'Bacon May Die', folder: 'action-games-main/bacon-may-die', category: 'Action' },
-        { name: 'Black Knight', folder: 'action-games-main/blackknight', category: 'Action' },
-        { name: 'Blumgi Slime', folder: 'action-games-main/blumgi-slime', category: 'Action' },
-        { name: 'Bob The Robber 2', folder: 'action-games-main/bobtherobber2', category: 'Action' },
-        { name: 'Bob The Robber 4', folder: 'action-games-main/bob-the-robber-4', category: 'Action' },
-        { name: 'Bomb It 7', folder: 'action-games-main/bomb-it-7', category: 'Action' },
-        { name: 'Boxel Rebound', folder: 'action-games-main/boxel-rebound', category: 'Action' },
-        { name: 'Boxhead 2Play', folder: 'action-games-main/boxhead2play', category: 'Action' },
-        { name: 'Bullet Force', folder: 'action-games-main/bullet-force', category: 'Action' },
-        { name: 'Bumper Ball', folder: 'action-games-main/bumper-ball', category: 'Action' },
-        { name: 'Burrito Bison Revenge', folder: 'action-games-main/burrito-bison-revenge', category: 'Action' },
-        { name: 'Champion Island', folder: 'action-games-main/champion-island', category: 'Action' },
-        { name: 'Champion Archer', folder: 'action-games-main/championarcher', category: 'Action' },
-        { name: 'Craftmine', folder: 'action-games-main/craftmine', category: 'Action' },
-        { name: 'Crazy Tunnel 3D', folder: 'action-games-main/crazy-tunnel-3d', category: 'Action' },
-        { name: 'Creative Kill Chamber', folder: 'action-games-main/creativekillchamber', category: 'Action' },
-        { name: 'Cubefield', folder: 'action-games-main/cubefield', category: 'Action' },
-        { name: 'Dante', folder: 'action-games-main/dante', category: 'Action' },
-        { name: 'Dead Again', folder: 'action-games-main/dead-again', category: 'Action' },
-        { name: 'Death Run 3D', folder: 'action-games-main/death-run-3d', category: 'Action' },
-        { name: 'Defend The Tank', folder: 'action-games-main/defend-the-tank', category: 'Action' },
-        { name: 'Dodge', folder: 'action-games-main/dodge', category: 'Action' },
-        { name: 'Dots.io', folder: 'action-games-main/dots-io', category: 'Action' },
-        { name: 'Down The Hill', folder: 'action-games-main/down-the-hill', category: 'Action' },
-        { name: 'Dragon vs Bricks', folder: 'action-games-main/dragon-vs-bricks', category: 'Action' },
-        { name: 'Eagle Ride', folder: 'action-games-main/eagle-ride', category: 'Action' },
-        { name: 'Eat The Fish', folder: 'action-games-main/eat-the-fish', category: 'Action' },
-        { name: 'Electron Dash', folder: 'action-games-main/electron-dash', category: 'Action' },
-        { name: 'Endless Tunnel', folder: 'action-games-main/endless-tunnel', category: 'Action' },
-        { name: 'Endless War 3', folder: 'action-games-main/endlesswar3', category: 'Action' },
-        { name: 'Evil Glitch', folder: 'action-games-main/evil-glitch', category: 'Action' },
-        { name: 'Fancy Pants 2', folder: 'action-games-main/fancy-pants-2', category: 'Action' },
-        { name: 'Fancy Pants 3', folder: 'action-games-main/fancy-pants-3', category: 'Action' },
-        { name: 'Fancy Pants Adventures', folder: 'action-games-main/fancypantsadventures', category: 'Action' },
-        { name: 'Fireboy & Watergirl', folder: 'action-games-main/fireboywatergirlforesttemple', category: 'Action' },
-        { name: 'Fish Master', folder: 'action-games-main/fish-master', category: 'Action' },
-        { name: 'FNAF', folder: 'action-games-main/fnaf', category: 'Action' },
-        { name: 'FNAW', folder: 'action-games-main/fnaw', category: 'Action' },
-        { name: 'Football Run', folder: 'action-games-main/football-run', category: 'Action' },
-        { name: "Froggy's Battle", folder: 'action-games-main/froggys-battle', category: 'Action' },
-        { name: 'Frying Nemo', folder: 'action-games-main/frying-nemo', category: 'Action' },
-        { name: 'Funny Shooter 2', folder: 'action-games-main/funnyshooter2', category: 'Action' },
-        { name: 'Galaga', folder: 'action-games-main/galaga', category: 'Action' },
-        { name: 'Fishing Game', folder: 'action-games-main/generic-fishing-game', category: 'Action' },
-        { name: 'Geometry Dash', folder: 'action-games-main/geometry-dash', category: 'Action' },
-        { name: 'Getaway Shootout', folder: 'action-games-main/getaway-shootout', category: 'Action' },
-        { name: 'Gimme The Airpod', folder: 'action-games-main/gimme-the-airpod', category: 'Action' },
-        { name: 'Gladihoppers', folder: 'action-games-main/gladihoppers', category: 'Action' },
-        { name: 'Glitch Dash', folder: 'action-games-main/glitch-dash', category: 'Action' },
-        { name: 'Gobdun', folder: 'action-games-main/gobdun', category: 'Action' },
-        { name: 'Goodnight', folder: 'action-games-main/goodnight', category: 'Action' },
-        { name: 'Groovy Ski', folder: 'action-games-main/groovy-ski', category: 'Action' },
-        { name: 'G-Switch', folder: 'action-games-main/gswitch', category: 'Action' },
-        { name: 'G-Switch 2', folder: 'action-games-main/gswitch-2', category: 'Action' },
-        { name: 'G-Switch 3', folder: 'action-games-main/gswitch-3', category: 'Action' },
-        { name: 'Gun Mayhem', folder: 'action-games-main/gun-mayhem', category: 'Action' },
-        { name: 'Gun Mayhem 2', folder: 'action-games-main/gun-mayhem-2', category: 'Action' },
-        { name: 'Gun Mayhem Redux', folder: 'action-games-main/gun-mayhem-redux', category: 'Action' },
-        { name: 'Gun Spin', folder: 'action-games-main/gun-spin', category: 'Action' },
-        { name: 'Gunblood', folder: 'action-games-main/gunblood', category: 'Action' },
-        { name: 'Hammer Master', folder: 'action-games-main/hammer-master', category: 'Action' },
-        { name: 'Happy Hop', folder: 'action-games-main/happy-hop', category: 'Action' },
-        { name: 'HBA', folder: 'action-games-main/hba', category: 'Action' },
-        { name: 'Helicopter', folder: 'action-games-main/helicopter', category: 'Action' },
-        { name: 'Hide And Smash', folder: 'action-games-main/hide-and-smash', category: 'Action' },
-        { name: 'Hole.io', folder: 'action-games-main/hole-io', category: 'Action' },
-        { name: 'House of Hazards', folder: 'action-games-main/house-of-hazards', category: 'Action' },
-        { name: 'Hungry Lamu', folder: 'action-games-main/hungry-lamu', category: 'Action' },
-        { name: 'Infinite Soccer', folder: 'action-games-main/infinite-soccer', category: 'Action' },
-        { name: 'Iron Snout', folder: 'action-games-main/iron-snout', category: 'Action' },
-        { name: 'Jetpack Joyride', folder: 'action-games-main/jetpack-joyride', category: 'Action' },
-        { name: 'Just Fall', folder: 'action-games-main/just-fall', category: 'Action' },
-        { name: 'Just One Boss', folder: 'action-games-main/just-one-boss', category: 'Action' },
-        { name: 'Kitchen Gun Game', folder: 'action-games-main/kitchen-gun-game', category: 'Action' },
-        { name: 'Knife Master', folder: 'action-games-main/knife-master', category: 'Action' },
-        { name: 'Knight Hero Adventure', folder: 'action-games-main/knight-hero-adventure', category: 'Action' },
-        { name: 'Knives Crash', folder: 'action-games-main/knives-crash', category: 'Action' },
-        { name: 'Knives.io', folder: 'action-games-main/knives-io', category: 'Action' },
-        { name: 'Leader Strike', folder: 'action-games-main/leader-strike', category: 'Action' },
-        { name: 'Mario', folder: 'action-games-main/mario', category: 'Action' },
-        { name: 'Steal A Brainrot', folder: 'https://www.msn.com/en-us/play/games/Steal-Brainrot-Online/cg-9pltx207s22g', category: 'Action' },
-
-        // CASUAL GAMES
-        { name: 'Doge Miner', folder: 'casual-games-main/DogeMiner', category: 'Casual' },
-        { name: 'Ages of Conflict', folder: 'casual-games-main/ages-of-conflict', category: 'Casual' },
-        { name: "Baldi's Basics", folder: 'casual-games-main/baldis-basics', category: 'Casual' },
-        { name: 'Big Red Button', folder: 'casual-games-main/bigredbutton', category: 'Casual' },
-        { name: 'Bitcoin Clicker', folder: 'casual-games-main/bitcoin-clicker', category: 'Casual' },
-        { name: 'Bottle Flip', folder: 'casual-games-main/bottle-flip', category: 'Casual' },
-        { name: 'Bottle Flip 3D', folder: 'casual-games-main/bottle-flip-3d', category: 'Casual' },
-        { name: 'Clicker Heroes', folder: 'casual-games-main/clicker-heroes', category: 'Casual' },
-        { name: 'Cookie Clicker', folder: 'casual-games-main/cookie-clicker', category: 'Casual' },
-        { name: 'Core Ball', folder: 'casual-games-main/core-ball', category: 'Casual' },
-        { name: 'CSGO Clicker', folder: 'casual-games-main/csgo-clicker', category: 'Casual' },
-        { name: 'Dino Merge', folder: 'casual-games-main/dino-merge', category: 'Casual' },
-        { name: 'Doodle Jump', folder: 'casual-games-main/doodle-jump', category: 'Casual' },
-        { name: 'Duck Life', folder: 'casual-games-main/ducklife', category: 'Casual' },
-        { name: 'Duck Life 2', folder: 'casual-games-main/ducklife-2', category: 'Casual' },
-        { name: 'Duck Life 3', folder: 'casual-games-main/ducklife-3', category: 'Casual' },
-        { name: 'Duck Life 4', folder: 'casual-games-main/ducklife4', category: 'Casual' },
-        { name: 'Eel Slap', folder: 'casual-games-main/eel-slap', category: 'Casual' },
-        { name: 'Elastic Face', folder: 'casual-games-main/elastic-face', category: 'Casual' },
-        { name: 'Fake Virus', folder: 'casual-games-main/fake-virus', category: 'Casual' },
-        { name: 'Fisherman Life', folder: 'casual-games-main/fisherman-life', category: 'Casual' },
-        { name: 'Flappy Bird', folder: 'casual-games-main/flappy-bird', category: 'Casual' },
-        { name: 'Fruit Ninja', folder: 'casual-games-main/fruit-ninja', category: 'Casual' },
-        { name: 'Guess Kitty', folder: 'casual-games-main/guess-kitty', category: 'Casual' },
-        { name: 'Gura Temberine', folder: 'casual-games-main/gura-temberine', category: 'Casual' },
-        { name: 'Hacker Type', folder: 'casual-games-main/hackertype', category: 'Casual' },
-        { name: 'Hop Pop It', folder: 'casual-games-main/hop-pop-it', category: 'Casual' },
-        { name: 'Idle Breakout', folder: 'casual-games-main/idle-breakout', category: 'Casual' },
-        { name: 'Idle Light City', folder: 'casual-games-main/idle-light-city', category: 'Casual' },
-        { name: 'Idle Mining', folder: 'casual-games-main/idle-mining', category: 'Casual' },
-        { name: 'Idle Restaurants', folder: 'casual-games-main/idle-restaurants', category: 'Casual' },
-        { name: 'Idle Tree City', folder: 'casual-games-main/idle-tree-city', category: 'Casual' },
-        { name: 'Kitten Cannon', folder: 'casual-games-main/kittencannon', category: 'Casual' },
-        { name: 'Learn to Fly', folder: 'casual-games-main/learntofly', category: 'Casual' },
-        { name: 'Learn to Fly 2', folder: 'casual-games-main/learn-to-fly-2', category: 'Casual' },
-        { name: 'Little Alchemy 2', folder: 'casual-games-main/little-alchemy-2', category: 'Casual' },
-        { name: 'Merge Harvest', folder: 'casual-games-main/merge-harvest', category: 'Casual' },
-        { name: 'Merge Round Racers', folder: 'casual-games-main/merge-round-racers', category: 'Casual' },
-        { name: 'Minecraft Case', folder: 'casual-games-main/minecraft-case', category: 'Casual' },
-        { name: 'Nut Simulator', folder: 'casual-games-main/nut-simulator', category: 'Casual' },
-        { name: "Papa's Bakeria", folder: 'casual-games-main/papas-bake', category: 'Casual' },
-        { name: "Papa's Cheeseria", folder: 'casual-games-main/papas-cheese', category: 'Casual' },
-        { name: "Papa's Cupcakeria", folder: 'casual-games-main/papas-cupcake', category: 'Casual' },
-        { name: "Papa's Donuteria", folder: 'casual-games-main/papas-donut', category: 'Casual' },
-        { name: "Papa's Freezeria", folder: 'casual-games-main/papas-freeze', category: 'Casual' },
-        { name: "Papa's Hot Doggeria", folder: 'casual-games-main/papas-hotdog', category: 'Casual' },
-        { name: "Papa's Pancakeria", folder: 'casual-games-main/papas-pancake', category: 'Casual' },
-        { name: "Papa's Pastaria", folder: 'casual-games-main/papas-pasta', category: 'Casual' },
-        { name: "Papa's Scooperia", folder: 'casual-games-main/papas-scoop', category: 'Casual' },
-        { name: "Papa's Sushiria", folder: 'casual-games-main/papas-sushi', category: 'Casual' },
-        { name: "Papa's Taco Mia", folder: 'casual-games-main/papas-taco', category: 'Casual' },
-        { name: "Papa's Wingeria", folder: 'casual-games-main/papas-wing', category: 'Casual' },
-        { name: "Papa's Burgeria", folder: 'casual-games-main/papasburgeria', category: 'Casual' },
-        { name: "Papa's Pizzeria", folder: 'casual-games-main/papaspizzaria', category: 'Casual' },
-        { name: 'Particle Clicker', folder: 'casual-games-main/particle-clicker', category: 'Casual' },
-        { name: 'Pou', folder: 'casual-games-main/pou', category: 'Casual' },
-        { name: 'President Simulator', folder: 'casual-games-main/president-simulator', category: 'Casual' },
-        { name: 'Push The Square', folder: 'casual-games-main/push-the-square', category: 'Casual' },
-        { name: 'Rise Higher', folder: 'casual-games-main/rise-higher', category: 'Casual' },
-        { name: 'Sandboxels', folder: 'casual-games-main/sandboxels', category: 'Casual' },
-        { name: 'Sort The Court', folder: 'casual-games-main/sort-the-court', category: 'Casual' },
-        { name: 'Space Bar Clicker', folder: 'casual-games-main/space-bar-clicker', category: 'Casual' },
-        { name: 'Space Company', folder: 'casual-games-main/space-company', category: 'Casual' },
-        { name: 'Stair Race 3D', folder: 'casual-games-main/stair-race-3d', category: 'Casual' },
-        { name: 'Tall.io', folder: 'casual-games-main/tall-io', category: 'Casual' },
-        { name: 'Townscaper', folder: 'casual-games-main/townscaper', category: 'Casual' },
-        { name: 'Veloce', folder: 'casual-games-main/veloce', category: 'Casual' },
-        { name: 'WBWWB', folder: 'casual-games-main/wbwwb', category: 'Casual' },
-        { name: 'Weavesilk', folder: 'casual-games-main/weavesilk', category: 'Casual' },
-        { name: 'Fluid Simulation', folder: 'casual-games-main/webgl-fluid-simulation', category: 'Casual' },
-        { name: 'Whack Your Boss', folder: 'casual-games-main/whack-your-boss', category: 'Casual' },
-        { name: 'Yoshi Fabrication', folder: 'casual-games-main/yoshifabrication', category: 'Casual' },
-
-        // DRIVING GAMES
-        { name: '1v1 Soccer', folder: 'driving-games-main/1v1-soccer', category: 'Driving' },
-        { name: '3D Bowling', folder: 'driving-games-main/3d-bowling', category: 'Driving' },
-        { name: '8 Ball Pool', folder: 'driving-games-main/8-ball', category: 'Driving' },
-        { name: 'Adrenaline Challenge', folder: 'driving-games-main/adrenalinechallenge', category: 'Driving' },
-        { name: 'Adventure Drivers', folder: 'driving-games-main/adventure-drivers', category: 'Driving' },
-        { name: 'Aquapark Slides', folder: 'driving-games-main/aquapark-slides', category: 'Driving' },
-        { name: 'Axis Football League', folder: 'driving-games-main/axis-football-league', category: 'Driving' },
-        { name: 'Basket and Ball', folder: 'driving-games-main/basket-and-ball', category: 'Driving' },
-        { name: 'Basket Champs', folder: 'driving-games-main/basket-champs', category: 'Driving' },
-        { name: 'Basket Random', folder: 'driving-games-main/basket-random', category: 'Driving' },
-        { name: 'Basketball Stars', folder: 'driving-games-main/basketball-stars', category: 'Driving' },
-        { name: 'Bicycle Stunt 3D', folder: 'driving-games-main/bicycle-stunt-3d', category: 'Driving' },
-        { name: 'Big Shot Boxing', folder: 'driving-games-main/big-shot-boxing', category: 'Driving' },
-        { name: 'Biker Street', folder: 'driving-games-main/biker-street', category: 'Driving' },
-        { name: 'Boxing Random', folder: 'driving-games-main/boxing-random', category: 'Driving' },
-        { name: "Burnin' Rubber 5 XS", folder: 'driving-games-main/burnin-rubber-5xs', category: 'Driving' },
-        { name: 'Car Rush', folder: 'driving-games-main/car-rush', category: 'Driving' },
-        { name: 'Cars Simulator', folder: 'driving-games-main/cars-simulator', category: 'Driving' },
-        { name: 'Cartoon Mini Racing', folder: 'driving-games-main/cartoon-mini-racing', category: 'Driving' },
-        { name: 'Cluster Rush', folder: 'driving-games-main/cluster-rush', category: 'Driving' },
-        { name: 'Crazy Cars', folder: 'driving-games-main/crazy-cars', category: 'Driving' },
-        { name: 'Death Car', folder: 'driving-games-main/death-car', category: 'Driving' },
-        { name: 'Draw The Hill', folder: 'driving-games-main/draw-the-hill', category: 'Driving' },
-        { name: 'Drift Boss', folder: 'driving-games-main/drift-boss', category: 'Driving' },
-        { name: 'Drift Dudes', folder: 'driving-games-main/drift-dudes', category: 'Driving' },
-        { name: 'Drive Mad', folder: 'driving-games-main/drive-mad', category: 'Driving' },
-        { name: 'Earn to Die', folder: 'driving-games-main/earn-to-die', category: 'Driving' },
-        { name: 'Edge Surf', folder: 'driving-games-main/edge-surf', category: 'Driving' },
-        { name: 'Eggy Car', folder: 'driving-games-main/eggy-car', category: 'Driving' },
-        { name: 'Endless Truck', folder: 'driving-games-main/endless-truck', category: 'Driving' },
-        { name: 'Football Brawl', folder: 'driving-games-main/football-brawl', category: 'Driving' },
-        { name: 'Football Legends', folder: 'driving-games-main/football-legends', category: 'Driving' },
-        { name: 'Football Strike', folder: 'driving-games-main/football-strike', category: 'Driving' },
-        { name: 'Get on Top', folder: 'driving-games-main/get-on-top', category: 'Driving' },
-        { name: 'Happy Wheels', folder: 'driving-games-main/happy-wheels', category: 'Driving' },
-        { name: 'Head Soccer', folder: 'driving-games-main/head-soccer', category: 'Driving' },
-        { name: 'Heads Arena', folder: 'driving-games-main/heads-arena', category: 'Driving' },
-        { name: 'Icycle', folder: 'driving-games-main/icycle', category: 'Driving' },
-        { name: 'Impossible Monster Truck', folder: 'driving-games-main/impossible-monster-truck', category: 'Driving' },
-        { name: 'Indian Truck Simulator', folder: 'driving-games-main/indian-truck-simulator', category: 'Driving' },
-        { name: 'Mad Truck Challenge', folder: 'driving-games-main/mad-truck-challenge', category: 'Driving' },
-        { name: 'Madalin Stunt Cars 2', folder: 'driving-games-main/madalin-stunt-cars-2', category: 'Driving' },
-        { name: 'Madalin Stunt Cars 3', folder: 'driving-games-main/madalin-stunt-cars-3', category: 'Driving' },
-        { name: 'Monster Truck Destroyer', folder: 'driving-games-main/monster-truck-destroyer', category: 'Driving' },
-        { name: 'Monster Truck Zombie', folder: 'driving-games-main/monster-truck-zombie', category: 'Driving' },
-        { name: 'Moto Trial Racing 2', folder: 'driving-games-main/moto-trial-racing-2', category: 'Driving' },
-        { name: 'Moving Truck', folder: 'driving-games-main/moving-truck', category: 'Driving' },
-        { name: 'Nitro Knights', folder: 'driving-games-main/nitro-knights', category: 'Driving' },
-        { name: 'Pako Highway', folder: 'driving-games-main/pako-highway', category: 'Driving' },
-        { name: 'Parking Fury', folder: 'driving-games-main/parking-fury', category: 'Driving' },
-        { name: 'Parking Fury 2', folder: 'driving-games-main/parking-fury-2', category: 'Driving' },
-        { name: 'Parking Fury 3', folder: 'driving-games-main/parking-fury-3', category: 'Driving' },
-        { name: 'Penalty Kick', folder: 'driving-games-main/penalty-kick', category: 'Driving' },
-        { name: 'Penalty Shooter 2', folder: 'driving-games-main/penalty-shooter-2', category: 'Driving' },
-        { name: 'Penalty Shooters 3', folder: 'driving-games-main/penalty-shooters-3', category: 'Driving' },
-        { name: 'Pixel Smash Duels', folder: 'driving-games-main/pixel-smash-duels', category: 'Driving' },
-        { name: 'Racing Monster Truck', folder: 'driving-games-main/racing-monster-truck', category: 'Driving' },
-        { name: 'Real Flying Truck', folder: 'driving-games-main/real-flying-truck', category: 'Driving' },
-        { name: 'Real Garbage Truck', folder: 'driving-games-main/real-garbage-truck', category: 'Driving' },
-        { name: 'Retro Bowl', folder: 'driving-games-main/retro-bowl', category: 'Driving' },
-        { name: 'Retro Bowl College', folder: 'driving-games-main/retro-bowl-college', category: 'Driving' },
-        { name: 'Rocket Soccer Derby', folder: 'driving-games-main/rocket-soccer-derby', category: 'Driving' },
-        { name: 'Scrap Metal', folder: 'driving-games-main/scrapmetal', category: 'Driving' },
-        { name: 'Sky Car Stunt', folder: 'driving-games-main/sky-car-stunt', category: 'Driving' },
-        { name: 'Soccer Heads', folder: 'driving-games-main/soccer-heads', category: 'Driving' },
-        { name: 'Soccer Random', folder: 'driving-games-main/soccer-random', category: 'Driving' },
-        { name: 'Soccer Skills', folder: 'driving-games-main/soccer-skills', category: 'Driving' },
-        { name: 'Sprinter', folder: 'driving-games-main/sprinter', category: 'Driving' },
-        { name: 'Super Liquid Soccer', folder: 'driving-games-main/super-liquid-soccer', category: 'Driving' },
-        { name: 'The Heist', folder: 'driving-games-main/theheist', category: 'Driving' },
-        { name: 'Ultimate Offroad', folder: 'driving-games-main/ultimate-offroad', category: 'Driving' },
-        { name: 'Volley Random', folder: 'driving-games-main/volley-random', category: 'Driving' },
-        { name: 'Wheelie Bike', folder: 'driving-games-main/wheelie-bike', category: 'Driving' },
-        { name: 'Wheelie Bike 2', folder: 'driving-games-main/wheelie-bike-2', category: 'Driving' },
-        { name: 'X Trial Racing', folder: 'driving-games-main/x-trial-racing', category: 'Driving' },
-        { name: 'Polytrack', folder: 'driving-games-main/polytrack', category: 'Driving' },
+        { name: '10 Minutes Till Dawn', folder: '10-minutes-till-dawn', category: 'Action' },
 
         // STRATEGY GAMES
-        { name: '1', folder: 'strategy-games-main/1', category: 'Strategy' },
-        { name: '1010 Deluxe', folder: 'strategy-games-main/1010-deluxe', category: 'Strategy' },
-        { name: '2048', folder: 'strategy-games-main/2048', category: 'Strategy' },
-        { name: '2048 Multitask', folder: 'strategy-games-main/2048-multitask', category: 'Strategy' },
-        { name: '9007199254740992', folder: 'strategy-games-main/9007199254740992', category: 'Strategy' },
-        { name: 'Achievement Unlocked', folder: 'strategy-games-main/achievementunlocked', category: 'Strategy' },
-        { name: 'Adventure Anxiety', folder: 'strategy-games-main/adventure-anxiety', category: 'Strategy' },
-        { name: 'Among Us', folder: 'strategy-games-main/among-us', category: 'Strategy' },
-        { name: 'Bad Ice Cream', folder: 'strategy-games-main/bad-ice-cream', category: 'Strategy' },
-        { name: 'Bad Ice Cream 2', folder: 'strategy-games-main/bad-ice-cream-2', category: 'Strategy' },
-        { name: 'Bad Ice Cream 3', folder: 'strategy-games-main/bad-ice-cream-3', category: 'Strategy' },
-        { name: 'Ball Sort Halloween', folder: 'strategy-games-main/ball-sort-halloween', category: 'Strategy' },
-        { name: 'Ball Sort Puzzle', folder: 'strategy-games-main/ball-sort-puzzle', category: 'Strategy' },
-        { name: 'Ball Sort Soccer', folder: 'strategy-games-main/ball-sort-soccer', category: 'Strategy' },
-        { name: 'Ballistic', folder: 'strategy-games-main/ballistic', category: 'Strategy' },
-        { name: 'Bally', folder: 'strategy-games-main/bally', category: 'Strategy' },
-        { name: 'Battle for Gondor', folder: 'strategy-games-main/battleforgondor', category: 'Strategy' },
-        { name: 'BitLife', folder: 'strategy-games-main/bitlife', category: 'Strategy' },
-        { name: 'Black Hole Square', folder: 'strategy-games-main/blacholesquare', category: 'Strategy' },
-        { name: 'Block Pig', folder: 'strategy-games-main/block-pig', category: 'Strategy' },
-        { name: 'Bloons TD', folder: 'strategy-games-main/bloonstd', category: 'Strategy' },
-        { name: 'Bloons TD 2', folder: 'strategy-games-main/bloonstd2', category: 'Strategy' },
-        { name: 'Bloons TD 4', folder: 'strategy-games-main/bloonstd4', category: 'Strategy' },
-        { name: 'Bloxors', folder: 'strategy-games-main/bloxors', category: 'Strategy' },
-        { name: 'Blumgi Rocket', folder: 'strategy-games-main/blumgi-rocket', category: 'Strategy' },
-        { name: 'Bouncy Woods', folder: 'strategy-games-main/bouncy-woods', category: 'Strategy' },
-        { name: 'Breaking The Bank', folder: 'strategy-games-main/breakingthebank', category: 'Strategy' },
-        { name: 'BTTS', folder: 'strategy-games-main/btts', category: 'Strategy' },
-        { name: 'Bubble Pop', folder: 'strategy-games-main/bubble-pop', category: 'Strategy' },
-        { name: 'Burrito Bison', folder: 'strategy-games-main/burrito-bison', category: 'Strategy' },
-        { name: 'Cannon Basketball 4', folder: 'strategy-games-main/cannon-basketball-4', category: 'Strategy' },
-        { name: 'Canyon Defense', folder: 'strategy-games-main/canyondefense', category: 'Strategy' },
-        { name: 'Cell Machine', folder: 'strategy-games-main/cell-machine', category: 'Strategy' },
-        { name: 'Checkers Legend', folder: 'strategy-games-main/checkers-legend', category: 'Strategy' },
-        { name: 'Circlo', folder: 'strategy-games-main/circlo', category: 'Strategy' },
-        { name: 'Circlo 2', folder: 'strategy-games-main/circlo2', category: 'Strategy' },
-        { name: 'Climb Over It', folder: 'strategy-games-main/climb-over-it', category: 'Strategy' },
-        { name: 'Color Match', folder: 'strategy-games-main/color-match', category: 'Strategy' },
-        { name: 'Connect 3', folder: 'strategy-games-main/connect3', category: 'Strategy' },
-        { name: 'Crossy Road', folder: 'strategy-games-main/crossyroad', category: 'Strategy' },
-        { name: 'Cut The Rope', folder: 'strategy-games-main/ctr', category: 'Strategy' },
-        { name: 'Cut The Rope Holiday', folder: 'strategy-games-main/ctr-holiday', category: 'Strategy' },
-        { name: 'Cut The Rope TR', folder: 'strategy-games-main/ctr-tr', category: 'Strategy' },
-        { name: 'Cubes 2048', folder: 'strategy-games-main/cubes-2048', category: 'Strategy' },
-        { name: 'Deal or No Deal', folder: 'strategy-games-main/deal-or-no-deal', category: 'Strategy' },
-        { name: 'Deepest Sword', folder: 'strategy-games-main/deepest-sword', category: 'Strategy' },
-        { name: 'Dino Bros', folder: 'strategy-games-main/dino-bros', category: 'Strategy' },
-        { name: 'Doctor Acorn 2', folder: 'strategy-games-main/doctor-acorn2', category: 'Strategy' },
-        { name: 'Doge 2048', folder: 'strategy-games-main/doge2048', category: 'Strategy' },
-        { name: 'Dummy Never Fails', folder: 'strategy-games-main/dummy-never-fails', category: 'Strategy' },
-        { name: 'Dummy Never Fails 2', folder: 'strategy-games-main/dummy-never-fails-2', category: 'Strategy' },
-        { name: 'Edge Not Found', folder: 'strategy-games-main/edgenotfound', category: 'Strategy' },
-        { name: 'Escaping Prison', folder: 'strategy-games-main/escaping-prison', category: 'Strategy' },
-        { name: 'Evolution', folder: 'strategy-games-main/evolution', category: 'Strategy' },
-        { name: 'Exo', folder: 'strategy-games-main/exo', category: 'Strategy' },
-        { name: 'Factory Balls', folder: 'strategy-games-main/factoryballs', category: 'Strategy' },
-        { name: 'Farm Match', folder: 'strategy-games-main/farm-match', category: 'Strategy' },
-        { name: 'Flash Tetris', folder: 'strategy-games-main/flashtetris', category: 'Strategy' },
-        { name: 'Fleeing Complex', folder: 'strategy-games-main/fleeing-complex', category: 'Strategy' },
-        { name: 'Game Inside', folder: 'strategy-games-main/game-inside', category: 'Strategy' },
-        { name: 'George & The Printer', folder: 'strategy-games-main/georgeandtheprinter', category: 'Strategy' },
-        { name: 'Getting Over It', folder: 'strategy-games-main/getting-over-it', category: 'Strategy' },
-        { name: 'Go Ball', folder: 'strategy-games-main/go-ball', category: 'Strategy' },
-        { name: 'Go Tet', folder: 'strategy-games-main/go-tet', category: 'Strategy' },
-        { name: 'Google Feud', folder: 'strategy-games-main/google-feud', category: 'Strategy' },
-        { name: 'Gravity Soccer', folder: 'strategy-games-main/gravity-soccer', category: 'Strategy' },
-        { name: 'Greybox', folder: 'strategy-games-main/greybox', category: 'Strategy' },
-        { name: 'Handshakes', folder: 'strategy-games-main/handshakes', category: 'Strategy' },
-        { name: 'Hanger', folder: 'strategy-games-main/hanger', category: 'Strategy' },
-        { name: 'Hex Empire', folder: 'strategy-games-main/hexempire', category: 'Strategy' },
-        { name: 'Hextris', folder: 'strategy-games-main/hextris', category: 'Strategy' },
-        { name: 'Icy Head 2', folder: 'strategy-games-main/icy-head-2', category: 'Strategy' },
-        { name: 'Icy Head 3', folder: 'strategy-games-main/icy-head-3', category: 'Strategy' },
-        { name: 'Impossible Quiz', folder: 'strategy-games-main/impossiblequiz', category: 'Strategy' },
-        { name: 'Infiltrating Airship', folder: 'strategy-games-main/infiltrating-airship', category: 'Strategy' },
-        { name: 'Jewels Blitz 5', folder: 'strategy-games-main/jewels-blitz-5', category: 'Strategy' },
-        { name: 'Jungle TD', folder: 'strategy-games-main/jungle-td', category: 'Strategy' },
-        { name: 'Kingdom Defence', folder: 'strategy-games-main/kingdom-defence', category: 'Strategy' },
-        { name: 'Kingdom Guards', folder: 'strategy-games-main/kingdom-guards', category: 'Strategy' },
-        { name: 'Kingdom Rush', folder: 'strategy-games-main/kingdom-rush', category: 'Strategy' },
-        { name: 'Marble Dash', folder: 'strategy-games-main/marble-dash', category: 'Strategy' },
-        { name: 'Marbles Sorting', folder: 'strategy-games-main/marbles-sorting', category: 'Strategy' },
-        { name: 'Meme 2048', folder: 'strategy-games-main/meme2048', category: 'Strategy' },
-        { name: 'Minesweeper', folder: 'strategy-games-main/minesweeper', category: 'Strategy' },
-        { name: 'Mini Putt', folder: 'strategy-games-main/miniputt', category: 'Strategy' },
-        { name: 'Money Movers', folder: 'strategy-games-main/money-movers', category: 'Strategy' },
-        { name: 'Money Movers 2', folder: 'strategy-games-main/money-movers-2', category: 'Strategy' },
-        { name: 'Money Movers 3', folder: 'strategy-games-main/money-movers-3', category: 'Strategy' },
-        { name: 'Mr Bullet', folder: 'strategy-games-main/mr-bullet', category: 'Strategy' },
-        { name: 'My Rusty Submarine', folder: 'strategy-games-main/my-rusty-submarine', category: 'Strategy' },
-        { name: 'Ninja Cat', folder: 'strategy-games-main/ninja-cat', category: 'Strategy' },
-        { name: "Panda's Japan", folder: 'strategy-games-main/pandas-japan', category: 'Strategy' },
-        { name: 'Pandemic 2', folder: 'strategy-games-main/pandemic2', category: 'Strategy' },
-        { name: 'Papa Cherry Saga', folder: 'strategy-games-main/papa-cherry-saga', category: 'Strategy' },
-        { name: 'Park Out', folder: 'strategy-games-main/park-out', category: 'Strategy' },
-        { name: 'Plants vs Zombies', folder: 'strategy-games-main/plants-vs-zombies', category: 'Strategy' },
-        { name: 'Portal Flash', folder: 'strategy-games-main/portalflash', category: 'Strategy' },
-        { name: 'Pudding Monster', folder: 'strategy-games-main/pudding-monster', category: 'Strategy' },
-        { name: 'Push Your Luck', folder: 'strategy-games-main/push-your-luck', category: 'Strategy' },
+        { name: '1010 Deluxe', folder: '1010-deluxe', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: '10Minutestilldawn', folder: '10minutestilldawn', category: 'Action' },
+        { name: '1V1.Lol', folder: '1v1.lol', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: '1v1 Soccer', folder: '1v1-soccer', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: '1v1.LOL', folder: '1v1lol', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: '2048', folder: '2048', category: 'Strategy' },
+        { name: '2048 Multitask', folder: '2048-multitask', category: 'Strategy' },
+
+        // DRIVING GAMES
+        { name: '3D Bowling', folder: '3d-bowling', category: 'Driving' },
+        { name: '8 Ball Pool', folder: '8-ball', category: 'Driving' },
+
+        // STRATEGY GAMES
+        { name: '9007199254740992', folder: '9007199254740992', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'A Dark Room', folder: 'adarkroom', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Achievement Unlocked', folder: 'achievementunlocked', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Adam & Eve', folder: 'adam-eve', category: 'Action' },
+        { name: 'Adam & Eve 2', folder: 'adam-eve-2', category: 'Action' },
+        { name: 'Adanceoffireandice', folder: 'adanceoffireandice', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: 'Adrenaline Challenge', folder: 'adrenalinechallenge', category: 'Driving' },
+
+        // STRATEGY GAMES
+        { name: 'Adventure Anxiety', folder: 'adventure-anxiety', category: 'Strategy' },
+
+        // DRIVING GAMES
+        { name: 'Adventure Drivers', folder: 'adventure-drivers', category: 'Driving' },
+        { name: 'Adventuredrivers', folder: 'adventuredrivers', category: 'Driving' },
+
+        // CASUAL GAMES
+        { name: 'Ages of Conflict', folder: 'ages-of-conflict', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'Alien Hominid', folder: 'alienhominid', category: 'Action' },
+        { name: 'Amidst The Clouds', folder: 'amidst-the-clouds', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Among Us', folder: 'among-us', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Angry Sharks', folder: 'angry-sharks', category: 'Action' },
+        { name: 'Apple Shooter', folder: 'apple-shooter', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: 'Aquapark Slides', folder: 'aquapark-slides', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Arcane Archer', folder: 'arcane-archer', category: 'Action' },
+        { name: 'Asteroids', folder: 'asteroids', category: 'Action' },
+        { name: 'Astray', folder: 'astray', category: 'Action' },
+        { name: 'Avalanche', folder: 'avalanche', category: 'Action' },
+        { name: 'Awesome Tanks 2', folder: 'awesome-tanks-2', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'BTTS', folder: 'btts', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Backcountry', folder: 'backcountry', category: 'Action' },
+        { name: 'Backrooms', folder: 'backrooms', category: 'Action' },
+        { name: 'Backrooms 2D', folder: 'backrooms-2d', category: 'Action' },
+        { name: 'Bacon May Die', folder: 'bacon-may-die', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Bad Ice Cream', folder: 'bad-ice-cream', category: 'Strategy' },
+        { name: 'Bad Ice Cream 2', folder: 'bad-ice-cream-2', category: 'Strategy' },
+        { name: 'Bad Ice Cream 3', folder: 'bad-ice-cream-3', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Badicecream', folder: 'badicecream', category: 'Action' },
+        { name: 'Badicecream2', folder: 'badicecream2', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Ball Sort Halloween', folder: 'ball-sort-halloween', category: 'Strategy' },
+        { name: 'Ball Sort Puzzle', folder: 'ball-sort-puzzle', category: 'Strategy' },
+        { name: 'Ball Sort Soccer', folder: 'ball-sort-soccer', category: 'Strategy' },
+        { name: 'Ballistic', folder: 'ballistic', category: 'Strategy' },
+
+        // DRIVING GAMES
+        { name: 'Basket Champs', folder: 'basket-champs', category: 'Driving' },
+        { name: 'Basket Random', folder: 'basket-random', category: 'Driving' },
+        { name: 'Basket and Ball', folder: 'basket-and-ball', category: 'Driving' },
+        { name: 'Basketball Stars', folder: 'basketball-stars', category: 'Driving' },
+        { name: 'Basketballstars', folder: 'basketballstars', category: 'Driving' },
+        { name: 'Basketrandom', folder: 'basketrandom', category: 'Driving' },
+
+        // STRATEGY GAMES
+        { name: 'Battle for Gondor', folder: 'battleforgondor', category: 'Strategy' },
+
+        // CASUAL GAMES
+        { name: 'Big Red Button', folder: 'bigredbutton', category: 'Casual' },
+
+        // DRIVING GAMES
+        { name: 'Biker Street', folder: 'biker-street', category: 'Driving' },
+
+        // STRATEGY GAMES
+        { name: 'BitLife', folder: 'bitlife', category: 'Strategy' },
+
+        // CASUAL GAMES
+        { name: 'Bitcoin Clicker', folder: 'bitcoin-clicker', category: 'Casual' },
+
+        // STRATEGY GAMES
+        { name: 'Black Hole Square', folder: 'blacholesquare', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Black Knight', folder: 'blackknight', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Block Pig', folder: 'block-pig', category: 'Strategy' },
+        { name: 'Bloons TD', folder: 'bloonstd', category: 'Strategy' },
+        { name: 'Bloons TD 2', folder: 'bloonstd2', category: 'Strategy' },
+        { name: 'Bloons TD 4', folder: 'bloonstd4', category: 'Strategy' },
+        { name: 'Bloxors', folder: 'bloxors', category: 'Strategy' },
+        { name: 'Blumgi Rocket', folder: 'blumgi-rocket', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Blumgi Slime', folder: 'blumgi-slime', category: 'Action' },
+        { name: 'Bob The Robber 2', folder: 'bobtherobber2', category: 'Action' },
+        { name: 'Bomb It 7', folder: 'bomb-it-7', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Bottle Flip', folder: 'bottle-flip', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'Bounceback', folder: 'bounceback', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Bouncy Woods', folder: 'bouncy-woods', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Boxel Rebound', folder: 'boxel-rebound', category: 'Action' },
+        { name: 'Boxhead 2Play', folder: 'boxhead2play', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: 'Boxing Random', folder: 'boxing-random', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Boxingrandom', folder: 'boxingrandom', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Breaking The Bank', folder: 'breakingthebank', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Breaklock', folder: 'breaklock', category: 'Action' },
+        { name: 'Breakout', folder: 'breakout', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Bubble Pop', folder: 'bubble-pop', category: 'Strategy' },
+        { name: 'Burrito Bison', folder: 'burrito-bison', category: 'Strategy' },
+
+        // CASUAL GAMES
+        { name: 'CSGO Clicker', folder: 'csgo-clicker', category: 'Casual' },
+
+        // STRATEGY GAMES
+        { name: 'Cannon Basketball 4', folder: 'cannon-basketball-4', category: 'Strategy' },
+        { name: 'Canyon Defense', folder: 'canyondefense', category: 'Strategy' },
+
+        // DRIVING GAMES
+        { name: 'Car Rush', folder: 'car-rush', category: 'Driving' },
+        { name: 'Cars Simulator', folder: 'cars-simulator', category: 'Driving' },
+
+        // STRATEGY GAMES
+        { name: 'Cell Machine', folder: 'cell-machine', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Champion Archer', folder: 'championarcher', category: 'Action' },
+        { name: 'Champion Island', folder: 'champion-island', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Checkers Legend', folder: 'checkers-legend', category: 'Strategy' },
+        { name: 'Chess', folder: 'chess', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Chromedino', folder: 'chromedino', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Circlo', folder: 'circlo', category: 'Strategy' },
+        { name: 'Circlo 2', folder: 'circlo2', category: 'Strategy' },
+
+        // CASUAL GAMES
+        { name: 'Clicker Heroes', folder: 'clicker-heroes', category: 'Casual' },
+
+        // STRATEGY GAMES
+        { name: 'Climb Over It', folder: 'climb-over-it', category: 'Strategy' },
+
+        // DRIVING GAMES
+        { name: 'Cluster Rush', folder: 'cluster-rush', category: 'Driving' },
+
+        // STRATEGY GAMES
+        { name: 'Color Match', folder: 'color-match', category: 'Strategy' },
+        { name: 'Connect 3', folder: 'connect3', category: 'Strategy' },
+
+        // CASUAL GAMES
+        { name: 'Cookie Clicker', folder: 'cookie-clicker', category: 'Casual' },
+        { name: 'Cookieclicker', folder: 'cookieclicker', category: 'Casual' },
+        { name: 'Core Ball', folder: 'core-ball', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'Craftmine', folder: 'craftmine', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: 'Crazy Cars', folder: 'crazy-cars', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Crazycattle3D', folder: 'crazycattle3d', category: 'Action' },
+        { name: 'Creative Kill Chamber', folder: 'creativekillchamber', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Crossy Road', folder: 'crossyroad', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Cubefield', folder: 'cubefield', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Cut The Rope', folder: 'ctr', category: 'Strategy' },
+        { name: 'Cut The Rope Holiday', folder: 'ctr-holiday', category: 'Strategy' },
+        { name: 'Cut The Rope TR', folder: 'ctr-tr', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Cuttherope.Broken', folder: 'cuttherope.broken', category: 'Action' },
+        { name: 'Cuttherope2.Broken', folder: 'cuttherope2.broken', category: 'Action' },
+        { name: 'Dante', folder: 'dante', category: 'Action' },
+        { name: 'Dead Again', folder: 'dead-again', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Deal or No Deal', folder: 'deal-or-no-deal', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Death Run 3D', folder: 'death-run-3d', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Deepest Sword', folder: 'deepest-sword', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Defend The Tank', folder: 'defend-the-tank', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Dino Bros', folder: 'dino-bros', category: 'Strategy' },
+
+        // CASUAL GAMES
+        { name: 'Dino Merge', folder: 'dino-merge', category: 'Casual' },
+
+        // STRATEGY GAMES
+        { name: 'Doctor Acorn 2', folder: 'doctor-acorn2', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Dodge', folder: 'dodge', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Doge 2048', folder: 'doge2048', category: 'Strategy' },
+
+        // CASUAL GAMES
+        { name: 'Doge Miner', folder: 'DogeMiner', category: 'Casual' },
+        { name: 'Doodle Jump', folder: 'doodle-jump', category: 'Casual' },
+        { name: 'Doodlejump', folder: 'doodlejump', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'Down The Hill', folder: 'down-the-hill', category: 'Action' },
+        { name: 'Dragon vs Bricks', folder: 'dragon-vs-bricks', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: 'Draw The Hill', folder: 'draw-the-hill', category: 'Driving' },
+        { name: 'Drift Boss', folder: 'drift-boss', category: 'Driving' },
+        { name: 'Drive Mad', folder: 'drive-mad', category: 'Driving' },
+
+        // CASUAL GAMES
+        { name: 'Duck Life', folder: 'ducklife', category: 'Casual' },
+        { name: 'Duck Life 2', folder: 'ducklife-2', category: 'Casual' },
+        { name: 'Duck Life 3', folder: 'ducklife-3', category: 'Casual' },
+        { name: 'Duck Life 4', folder: 'ducklife4', category: 'Casual' },
+        { name: 'Ducklife2', folder: 'ducklife2', category: 'Casual' },
+        { name: 'Ducklife3', folder: 'ducklife3', category: 'Casual' },
+
+        // STRATEGY GAMES
+        { name: 'Edge Not Found', folder: 'edgenotfound', category: 'Strategy' },
+
+        // DRIVING GAMES
+        { name: 'Edge Surf', folder: 'edge-surf', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Edgesurf', folder: 'edgesurf', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Eel Slap', folder: 'eel-slap', category: 'Casual' },
+
+        // DRIVING GAMES
+        { name: 'Eggy Car', folder: 'eggy-car', category: 'Driving' },
+
+        // CASUAL GAMES
+        { name: 'Elastic Face', folder: 'elastic-face', category: 'Casual' },
+
+        // DRIVING GAMES
+        { name: 'Endless Truck', folder: 'endless-truck', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Endless War 3', folder: 'endlesswar3', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Escaping Prison', folder: 'escaping-prison', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Evil Glitch', folder: 'evil-glitch', category: 'Action' },
+        { name: 'Evilglitch', folder: 'evilglitch', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Evolution', folder: 'evolution', category: 'Strategy' },
+        { name: 'Exo', folder: 'exo', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'FNAF', folder: 'fnaf', category: 'Action' },
+        { name: 'FNAW', folder: 'fnaw', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Factory Balls', folder: 'factoryballs', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Factoryballsforever', folder: 'factoryballsforever', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Fake Virus', folder: 'fake-virus', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'Fancy Pants Adventures', folder: 'fancypantsadventures', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Farm Match', folder: 'farm-match', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Fireboy & Watergirl', folder: 'fireboywatergirlforesttemple', category: 'Action' },
+        { name: 'Fireboyandwatergirlintheforesttemple', folder: 'fireboyandwatergirlintheforesttemple', category: 'Action' },
+        { name: 'Fishing Game', folder: 'generic-fishing-game', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Flappy Bird', folder: 'flappy-bird', category: 'Casual' },
+        { name: 'Flappybird', folder: 'flappybird', category: 'Casual' },
+        { name: 'Flappybird.Old', folder: 'flappybird.old', category: 'Casual' },
+
+        // STRATEGY GAMES
+        { name: 'Flash Tetris', folder: 'flashtetris', category: 'Strategy' },
+        { name: 'Fleeing Complex', folder: 'fleeing-complex', category: 'Strategy' },
+
+        // DRIVING GAMES
+        { name: 'Football Brawl', folder: 'football-brawl', category: 'Driving' },
+        { name: 'Football Legends', folder: 'football-legends', category: 'Driving' },
+        { name: 'Football Strike', folder: 'football-strike', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Friendlyfire', folder: 'friendlyfire', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Fruit Ninja', folder: 'fruit-ninja', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'Frying Nemo', folder: 'frying-nemo', category: 'Action' },
+        { name: 'Funny Shooter 2', folder: 'funnyshooter2', category: 'Action' },
+        { name: 'Funnyshooter', folder: 'funnyshooter', category: 'Action' },
+        { name: 'G-Switch', folder: 'gswitch', category: 'Action' },
+        { name: 'G-Switch 2', folder: 'gswitch-2', category: 'Action' },
+        { name: 'G-Switch 3', folder: 'gswitch-3', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Game Inside', folder: 'game-inside', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Geodash', folder: 'geodash', category: 'Action' },
+        { name: 'Geometry Dash', folder: 'geometry-dash', category: 'Action' },
+        { name: 'Geometrydash', folder: 'geometrydash', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'George & The Printer', folder: 'georgeandtheprinter', category: 'Strategy' },
+
+        // DRIVING GAMES
+        { name: 'Get on Top', folder: 'get-on-top', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Getaway Shootout', folder: 'getaway-shootout', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Getting Over It', folder: 'getting-over-it', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Gimme The Airpod', folder: 'gimme-the-airpod', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Go Ball', folder: 'go-ball', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Gobdun', folder: 'gobdun', category: 'Action' },
+        { name: 'Goodnight', folder: 'goodnight', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Google Feud', folder: 'google-feud', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Gopherkart', folder: 'gopherkart', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Gravity Soccer', folder: 'gravity-soccer', category: 'Strategy' },
+        { name: 'Greybox', folder: 'greybox', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Groovy Ski', folder: 'groovy-ski', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Guess Kitty', folder: 'guess-kitty', category: 'Casual' },
+        { name: 'Gura Temberine', folder: 'gura-temberine', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'HBA', folder: 'hba', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Hacker Type', folder: 'hackertype', category: 'Casual' },
+
+        // STRATEGY GAMES
+        { name: 'Handshakes', folder: 'handshakes', category: 'Strategy' },
+        { name: 'Hanger', folder: 'hanger', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Happy Hop', folder: 'happy-hop', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: 'Head Soccer', folder: 'head-soccer', category: 'Driving' },
+        { name: 'Heads Arena', folder: 'heads-arena', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Helicopter', folder: 'helicopter', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Hex Empire', folder: 'hexempire', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Hexgl', folder: 'hexgl', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Hextris', folder: 'hextris', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Hide And Smash', folder: 'hide-and-smash', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Hop Pop It', folder: 'hop-pop-it', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'Hungry Lamu', folder: 'hungry-lamu', category: 'Action' },
+        { name: 'Iceagebabyadventure', folder: 'iceagebabyadventure', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Icy Head 2', folder: 'icy-head-2', category: 'Strategy' },
+        { name: 'Icy Head 3', folder: 'icy-head-3', category: 'Strategy' },
+
+        // CASUAL GAMES
+        { name: 'Idle Breakout', folder: 'idle-breakout', category: 'Casual' },
+        { name: 'Idle Mining', folder: 'idle-mining', category: 'Casual' },
+        { name: 'Idle Restaurants', folder: 'idle-restaurants', category: 'Casual' },
+
+        // STRATEGY GAMES
+        { name: 'Impossible Quiz', folder: 'impossiblequiz', category: 'Strategy' },
+        { name: 'Infiltrating Airship', folder: 'infiltrating-airship', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Infinite Soccer', folder: 'infinite-soccer', category: 'Action' },
+        { name: 'Iron Snout', folder: 'iron-snout', category: 'Action' },
+        { name: 'Jetpack Joyride', folder: 'jetpack-joyride', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Jewels Blitz 5', folder: 'jewels-blitz-5', category: 'Strategy' },
+        { name: 'Jumpingfrogspuzzle', folder: 'jumpingfrogspuzzle', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Just Fall', folder: 'just-fall', category: 'Action' },
+        { name: 'Just One Boss', folder: 'just-one-boss', category: 'Action' },
+        { name: 'Kitchen Gun Game', folder: 'kitchen-gun-game', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Kitten Cannon', folder: 'kittencannon', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'Knife Master', folder: 'knife-master', category: 'Action' },
+        { name: 'Konnekt', folder: 'konnekt', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Learn to Fly', folder: 'learntofly', category: 'Casual' },
+
+        // ACTION GAMES
+        { name: 'Learntofly2', folder: 'learntofly2', category: 'Action' },
+
+        // CASUAL GAMES
+        { name: 'Little Alchemy 2', folder: 'little-alchemy-2', category: 'Casual' },
+
+        // DRIVING GAMES
+        { name: 'Madalin Stunt Cars 2', folder: 'madalin-stunt-cars-2', category: 'Driving' },
+
+        // STRATEGY GAMES
+        { name: 'Marbles Sorting', folder: 'marbles-sorting', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Mario', folder: 'mario', category: 'Action' },
+        { name: 'Mario Bros', folder: 'mario-bros', category: 'Action' },
+        { name: 'Minecraft0.30', folder: 'minecraft0.30', category: 'Action' },
+        { name: 'Minecraft1.3', folder: 'minecraft1.3', category: 'Action' },
+        { name: 'Minecraft1.5.2', folder: 'minecraft1.5.2', category: 'Action' },
+        { name: 'Motox3M2', folder: 'motox3m2', category: 'Action' },
+        { name: 'Ovo', folder: 'ovo', category: 'Action' },
+        { name: 'Pacman', folder: 'pacman', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: 'Polytrack', folder: 'polytrack', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Pushback', folder: 'pushback', category: 'Action' },
+        { name: 'Racer', folder: 'racer', category: 'Action' },
+        { name: 'Radiusraid', folder: 'radiusraid', category: 'Action' },
+        { name: 'Retrobowl', folder: 'retrobowl', category: 'Action' },
+        { name: 'Retrohaunt', folder: 'retrohaunt', category: 'Action' },
+        { name: 'Riddleschool', folder: 'riddleschool', category: 'Action' },
+        { name: 'Riddleschool2', folder: 'riddleschool2', category: 'Action' },
+        { name: 'Riddleschool3', folder: 'riddleschool3', category: 'Action' },
+        { name: 'Riddleschool4', folder: 'riddleschool4', category: 'Action' },
+        { name: 'Riddleschool5', folder: 'riddleschool5', category: 'Action' },
+        { name: 'Roadblocks', folder: 'roadblocks', category: 'Action' },
+        { name: 'Rooftopsnipers', folder: 'rooftopsnipers', category: 'Action' },
+        { name: 'Sleepingbeauty', folder: 'sleepingbeauty', category: 'Action' },
+        { name: 'Slope', folder: 'slope', category: 'Action' },
+        { name: 'Snake', folder: 'snake', category: 'Action' },
+        { name: 'Snowrider3D', folder: 'snowrider3d', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: 'Soccerrandom', folder: 'soccerrandom', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Spacecompany', folder: 'spacecompany', category: 'Action' },
+        { name: 'Spaceinvaders', folder: 'spaceinvaders', category: 'Action' },
+        { name: 'Steal A Brainrot', folder: 'steal-a-brainrot', category: 'Action' },
+
+        // STRATEGY GAMES
+        { name: 'Tetris', folder: 'tetris', category: 'Strategy' },
+
+        // ACTION GAMES
+        { name: 'Thechromaincident', folder: 'thechromaincident', category: 'Action' },
+        { name: 'Thereisnogame', folder: 'thereisnogame', category: 'Action' },
+        { name: 'Towermaster', folder: 'towermaster', category: 'Action' },
+        { name: 'Tunnelrush', folder: 'tunnelrush', category: 'Action' },
+        { name: 'Underrun', folder: 'underrun', category: 'Action' },
+        { name: 'Vex3', folder: 'vex3', category: 'Action' },
+        { name: 'Vex4', folder: 'vex4', category: 'Action' },
+        { name: 'Vex5', folder: 'vex5', category: 'Action' },
+        { name: 'Vex6', folder: 'vex6', category: 'Action' },
+        { name: 'Vex7', folder: 'vex7', category: 'Action' },
+
+        // DRIVING GAMES
+        { name: 'Volleyrandom', folder: 'volleyrandom', category: 'Driving' },
+
+        // ACTION GAMES
+        { name: 'Webretro', folder: 'webretro', category: 'Action' },
+        { name: 'Worldshardestgame', folder: 'worldshardestgame', category: 'Action' },
+        { name: 'Worldshardestgame2', folder: 'worldshardestgame2', category: 'Action' },
+        { name: 'Xx142B2.Exe', folder: 'xx142b2.exe', category: 'Action' },
     ];
 
     // Sort games alphabetically
