@@ -1,106 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-Y71QM9DR66"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-Y71QM9DR66");
-    </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title class="cloak">Apple Shooter | MacVG</title>
-    <span id="macvgmacvg" name="game334"></span>
-    <link
-      rel="shortcut icon"
-      href="/logo.png"
-      type="image/x-icon"
-      class="favicon"
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
     />
-    <link rel="stylesheet" href="/gamehub/style.css" />
-    <script src="/projects/app.js"></script>
+    <title>Apple Shooter | MacVG</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
   </head>
-  <body>
-    <div class="game-container">
-      <div class="game-related">
-        <div class="actual" id="gameframe">
-          <iframe src="game.html" frameborder="0" id="iframe"> </iframe>
-          <div class="tool-bar">
-            <div class="more-left">
-              <img src="Untitled.jpg" alt="" />
-            </div>
-            <div class="leftest">
-              <h5 class="title">Apple Shooter</h5>
-              <a href="">Wolf Games</a>
-            </div>
-            <img src="/macvg/back.svg" id="back" style="width: 20pxoo" />
-            <img src="/macvg/star-regular.svg" style="width: 20px" id="star" />
-            <img src="/macvg/share-solid.svg" style="width: 20px" id="share" />
-            <img src="/macvg/download.svg" id="download" />
-            <img src="/macvg/expand.svg" id="fullscreen" />
-          </div>
-        </div>
-        <div class="more-info">
-          <div class="info">
-            <h3>About</h3>
-            Apple Shooter is a simple but addicting game where your goal is to shoot the apple on your friend's head without hitting them! Everytime you hit the apple, you shoot from a little further away and the game becomes more challenging. Can you reach the last level without shooting your friend? The longer you hold, the stronger the arrow!
-          </div>
-          <div class="info">
-            <h3>Controls</h3>
-            <ul>
-              <li>Drag: Aim</li>
-              <li>Release: Shoot</li>
-            </ul>
-          </div>
-          <div class="info">
-            <h3>Game Information</h3>
-            <ul>
-              <li>Release Date: March 2008</li>
-              <li>Developer: Wolf Games</li>
-              <li>Players: 5M+</li>
-              <li>Catagory:
-                <a href="/macvg/action-adventure.html" style="color: white"
-                  >Action and Adventure</a
-                >
-              </li>
-              <li>Genre: Shooting Games
-              </li>
-              <li>Build: HTML5, JavaScript</li>
-            </ul>
-          </div>
-          <div class="info similar">
-            <h3>Similar Games</h3>
-            <div class="games">
-              Still working on this one!
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="nav">
-          <a href="/macvg/" class="logo">
-            <img src="/macvg/macvg-logo.png" alt="" />
-          </a>
-          <div class="links">
-            <a href="/macvg/new.html" class="nav-link">New</a>
-            <a href="/macvg/trending.html" class="nav-link">Trending</a>
-            <a href="/macvg/groups.html" class="nav-link">Groups</a>
-            <a href="/macvg/bot.html" class="nav-link">Chat</a>
-            <a href="/macvg/projects/macboard/" class="nav-link">MacBoard</a>
-            <a href="/macvg/settings.html" class="nav-link">Settings</a>
-          </div>
-
-          <div class="copyright">© 2023 MacWeb</div>
-        </div>
-      </div>
-    </div>
+  <body style="overflow: hidden">
+    <div id="content"></div>
+    <div id="loader">Loading...</div>
+    <div id="orientation"></div>
+    <div id="dummy" style="position: fixed; right: 0; bottom: 0"></div>
+    <script type="text/javascript">
+      var gameName = "apple-shooter.min.js";
+      function addScript(src, buster, callback) {
+        var s = document.createElement("script");
+        s.setAttribute("src", src + "?v=" + buster);
+        if (typeof callback === "function") {
+          s.onload = callback;
+        }
+        document.body.appendChild(s);
+      }
+      addScript("version.js", Date.now(), function () {
+        addScript(gameName, version, function () {
+          new Game.GameObjects();
+        });
+      });
+    </script>
   </body>
 </html>

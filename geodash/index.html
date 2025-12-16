@@ -1,108 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-Y71QM9DR66"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title class="cloak">Geometry Dash Scratch | MacVG</title>
+<span id="macvgmacvg" name="game104"></span>
+    <link class="favicon" rel="shortcut icon" href="/logo.png" />
+    <script src="/macvg/cloaker.js"></script>
+<script src="/js/main.js"></script>
+<style media="screen">
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  font-size: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+#wrapper {
+  display: block;
+  width: 100vw;
+  height: 75vw;
+  position: relative;
+}
+#monitors {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+@media (min-aspect-ratio: 480/360) {
+  #wrapper {
+    height: 100vh;
+    width: 133.33333333333334vh;
+  }
+}
+#stage {
+  width: 100%;
+  height: 100%;
+}
 
-      gtag("config", "G-Y71QM9DR66");
-    </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title class="cloak">Geometry Dash Scratch | MacVG</title>
-    <span id="macvgmacvg" name="game104"></span>
-    <link
-      rel="shortcut icon"
-      href="/logo.png"
-      type="image/x-icon"
-      class="favicon"
-    />
-    <link rel="stylesheet" href="/gamehub/style.css" />
-    <script src="/projects/app.js"></script>
-  </head>
-  <body>
-    <div class="game-container">
-      <div class="game-related">
-        <div class="actual" id="gameframe">
-          <iframe src="game.html" frameborder="0" id="iframe">
-          </iframe>
-          <div class="tool-bar">
-            <div class="more-left">
-              <img src="geoscratchicon.png" alt="" />
-            </div>
-            <div class="leftest">
-              <h5 class="title">Geometry Dash Scratch</h5>
-              <a href="">RobTop Games, Griffpatch
-              </a>
-            </div>
-            <img src="/macvg/back.svg" id="back" style="width: 20pxoo" />
-            <img src="/macvg/star-regular.svg" style="width: 20px" id="star" />
-            <img src="/macvg/share-solid.svg" style="width: 20px" id="share" />
-            <img src="/macvg/download.svg" id="downloadd" />
-            <img src="/macvg/expand.svg" id="fullscreen" />
-          </div>
-        </div>
-        <div class="more-info">
-          <div class="info">
-            <h3>About</h3>
-            Oops, you caught us, we're still working hard to provide game
-            description on this game! In the upcoming updates, more and more
-            games will have their descriptions and instructions to help you beat
-            it, so stay tuned for more updates!<br /><br /><br /><br /><br /><br /><br />
-          </div>
-          <div class="info">
-            <h3>Controls</h3>
-            <ul>
-              Still working on this one O_O
-            </ul>
-          </div>
-          <div class="info">
-            <h3>Game Information</h3>
-            <ul>
-              <li>Release Date: Apr 19, 2016</li>
-              <li>Developer: 
-                RobTop Games, Griffpatch</li>
-              <li>Players: 500M+</li>
-              <li>Catagory:
-                <a href="/macvg/action-adventure.html" style="color: white"
-                  >Action and Adventure</a
-                >
-              </li>
-              <li>Genre: Platformer Games</li>
-              <li>Build: HTML5, JavaScript (From Scratch)</li>
-            </ul>
-          </div>
-          <div class="info similar">
-            <h3>Similar Games</h3>
-            <div class="games">Still working on this one!</div>
-          </div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="nav">
-          <a href="/macvg/" class="logo">
-            <img src="/macvg/macvg-logo.png" alt="" />
-          </a>
-          <div class="links">
-            <a href="/macvg/new.html" class="nav-link">New</a>
-            <a href="/macvg/trending.html" class="nav-link">Trending</a>
-            <a href="/macvg/groups.html" class="nav-link">Groups</a>
-            <a href="/macvg/bot.html" class="nav-link">Chat</a>
-            <a href="/macvg/projects/macboard/" class="nav-link">MacBoard</a>
-            <a href="/macvg/settings.html" class="nav-link">Settings</a>
-          </div>
+#loading-progress {
+  color: #0ff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 16px;
+}
 
-          <div class="copyright">© 2023 MacWeb</div>
-        </div>
-      </div>
-    </div>
-  </body>
+
+.monitor {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  overflow: hidden;
+  padding: 3px;
+  color: white;
+  white-space: pre;
+}
+.monitor-label {
+  margin: 0 5px;
+  font-weight: bold;
+}
+.monitor-value {
+  display: inline-block;
+  vertical-align: top;
+  min-width: 34px;
+  text-align: center;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: text;
+  transform: translateZ(0);
+}
+.default .monitor-value, .slider .monitor-value {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0 5px;
+  padding: 1px 3px;
+}
+.large {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.1rem 0.25rem;
+  min-width: 3rem;
+}
+.large .monitor-label {
+  display: none;
+}
+.large .monitor-value {
+  font-size: 1rem;
+  width: 100%;
+}
+.list {
+  padding: 0;
+  overflow: auto;
+  overflow-x: hidden;
+}
+.list .monitor-label {
+  text-align: center;
+  padding: 3px;
+  width: 100%;
+  display: block;
+  margin: 0;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+}
+.list .monitor-value {
+  display: block;
+}
+.row {
+  margin: 2px 5px;
+  transform: translateZ(0);
+  text-align: left;
+  border-radius: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  height: 20px;
+  line-height: 20px;
+  padding: 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slider input {
+  display: block;
+  width: 100%;
+  transform: translateZ(0);
+}
+#asking-box {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(33, 33, 33, 0.7);
+}
+.asking #asking-box {
+  display: block;
+}
+#question {
+  display: block;
+  margin: 0 10px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: white;
+}
+#answer {
+  border: none;
+  background: none;
+  width: 100%;
+  font: inherit;
+  font-size: 16px;
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+}
+#answer:focus {
+  outline: none;
+}
+</style>
+</head>
+<body>
+<div id="wrapper">
+<canvas id="stage"></canvas>
+<div id="monitors"></div>
+<div id="asking-box">
+<label id="question" for="answer">Question</label>
+<input type="text" id="answer">
+</div>
+</div>
+
+
+<span id="loading-progress">...</span>
+
+
+<script type="text/javascript" src="./gdash.js"></script>
+</body>
 </html>

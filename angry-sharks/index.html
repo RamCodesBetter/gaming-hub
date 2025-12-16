@@ -1,95 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-Y71QM9DR66"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-Y71QM9DR66");
-    </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title class="cloak">Angry Sharks | MacVG</title>
+    <meta charset="utf-8" />
     <span id="macvgmacvg" name="game17"></span>
-    <link
-      rel="shortcut icon"
-      href="/logo.png"
-      type="image/x-icon"
-      class="favicon"
-    />
-    <link rel="stylesheet" href="/gamehub/style.css" />
-    <script src="/projects/app.js"></script>
-  </head>
-  <body>
-    <div class="game-container">
-      <div class="game-related">
-        <div class="actual" id="gameframe">
-          <iframe src="game.html" frameborder="0" id="iframe"> </iframe>
-          <div class="tool-bar">
-            <div class="more-left">
-              <img src="assets/favicon/icon-512x512.png" alt="" />
-            </div>
-            <div class="leftest">
-              <h5 class="title">Angry Sharks</h5>
-              <a href="">Inlogic Games</a>
-            </div>
-            <img src="/macvg/back.svg" id="back" style="width: 20pxoo" />
-            <img src="/macvg/star-regular.svg" style="width: 20px" id="star" />
-            <img src="/macvg/share-solid.svg" style="width: 20px" id="share" />
-            <img src="/macvg/download.svg" id="download" />
-            <img src="/macvg/expand.svg" id="fullscreen" />
-          </div>
-        </div>
-        <div class="more-info">
-          <div class="info">
-            <h3>About</h3>
-            Use your mouse to guide your hungry shark and eat the fish! By touching a fish for a long enough time period you get score by eating it. Avoid touching the pufferfish or the green chemical waste or you'll loose health!
-          </div>
-          <div class="info">
-            <h3>Controls</h3>
-            <ul>
-              <li>Mouse: Swim</li>
-            </ul>
-          </div>
-          <div class="info">
-            <h3>Game Information</h3>
-            <ul>
-              No information is available for this game.
-            </ul>
-          </div>
-          <div class="info similar">
-            <h3>Similar Games</h3>
-            <div class="games">
-              Still working on this one!
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="nav">
-          <a href="/macvg/" class="logo">
-            <img src="/macvg/macvg-logo.png" alt="" />
-          </a>
-          <div class="links">
-            <a href="/macvg/new.html" class="nav-link">New</a>
-            <a href="/macvg/trending.html" class="nav-link">Trending</a>
-            <a href="/macvg/groups.html" class="nav-link">Groups</a>
-            <a href="/macvg/bot.html" class="nav-link">Chat</a>
-            <a href="/macvg/projects/macboard/" class="nav-link">MacBoard</a>
-            <a href="/macvg/settings.html" class="nav-link">Settings</a>
-          </div>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="user-scalable=no" />
 
-          <div class="copyright">© 2023 MacWeb</div>
-        </div>
-      </div>
+    <title class="cloak">Angry Sharks | MacVG</title>
+    <link class="favicon" rel="shortcut icon" href="/logo.png" />
+    <script src="/macvg/cloaker.js"></script>
+
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/game.css" />
+
+  
+  </head>
+
+  <body style="background-color: #000000;">
+    <div id="wrongRotation">
+      <img src="assets/img/rotate_screen.png" alt="" />
     </div>
+
+    <div id="game">
+      <script src="js/game.js"></script>
+      <script src="/js/main.js"></script>
+    </div>
+    <div class="font_preload" style="opacity: 0;">
+      <span style="font-family: 'gameFont', 'Arial', normal;"></span>
+    </div>
+    <div class="font_preload" style="opacity: 0;">
+      <span style="font-family: 'gameFont2', 'Arial', normal;"></span>
+    </div>
+    <div id="ads"></div>
   </body>
 </html>

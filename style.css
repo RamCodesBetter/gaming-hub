@@ -2570,3 +2570,33 @@ body.teacher-mode .fps-display {
     left: 20px;
   }
 }
+
+/* ===== FIX FOR BROKEN PLACEHOLDER IMAGES ===== */
+/* Hide broken images in game pages */
+img[src*="/macvg/"]:not([src*="logo"]),
+img[src*="/projects/"] {
+  display: none !important;
+}
+
+/* Hide similar games section if it contains broken images */
+.info.similar .games img[src=""],
+.info.similar .games img:not([src]),
+.info.similar .games img[width="0"],
+.info.similar .games img[height="0"] {
+  display: none !important;
+}
+
+/* Hide empty similar games containers */
+.info.similar .games:empty,
+.info.similar .games:has(img[style*="display: none"]) {
+  display: none !important;
+}
+
+/* Hide similar games section entirely - removes "Still working on this one!" message */
+.info.similar,
+.info.similar h3,
+.info.similar .games,
+div.info.similar {
+  display: none !important;
+  visibility: hidden !important;
+}

@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: '1010 Deluxe', folder: '1010-deluxe', category: 'Strategy' },
 
         // ACTION GAMES
-        { name: '10Minutestilldawn', folder: '10minutestilldawn', category: 'Action' },
+        { name: '10 Minutes Till Dawn v2', folder: '10minutestilldawn', category: 'Action' },
         { name: '1V1.Lol', folder: '1v1.lol', category: 'Action' },
 
         // DRIVING GAMES
         { name: '1v1 Soccer', folder: '1v1-soccer', category: 'Driving' },
 
         // ACTION GAMES
-        { name: '1v1.LOL', folder: '1v1lol', category: 'Action' },
+        { name: '1V1.Lol v2', folder: '1v1lol', category: 'Action' },
 
         // STRATEGY GAMES
         { name: '2048', folder: '2048', category: 'Strategy' },
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // ACTION GAMES
         { name: 'Adam & Eve', folder: 'adam-eve', category: 'Action' },
         { name: 'Adam & Eve 2', folder: 'adam-eve-2', category: 'Action' },
-        { name: 'Adanceoffireandice', folder: 'adanceoffireandice', category: 'Action' },
+        { name: 'A Dance of Fire and Ice', folder: 'adanceoffireandice', category: 'Action' },
 
         // DRIVING GAMES
         { name: 'Adrenaline Challenge', folder: 'adrenalinechallenge', category: 'Driving' },
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // DRIVING GAMES
         { name: 'Adventure Drivers', folder: 'adventure-drivers', category: 'Driving' },
-        { name: 'Adventuredrivers', folder: 'adventuredrivers', category: 'Driving' },
+        { name: 'Adventure Drivers v2', folder: 'adventuredrivers', category: 'Driving' },
 
         // CASUAL GAMES
         { name: 'Ages of Conflict', folder: 'ages-of-conflict', category: 'Casual' },
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'BTTS', folder: 'btts', category: 'Strategy' },
 
         // ACTION GAMES
-        { name: 'Backcountry', folder: 'backcountry', category: 'Action' },
+        { name: 'Back Country', folder: 'backcountry', category: 'Action' },
         { name: 'Backrooms', folder: 'backrooms', category: 'Action' },
         { name: 'Backrooms 2D', folder: 'backrooms-2d', category: 'Action' },
         { name: 'Bacon May Die', folder: 'bacon-may-die', category: 'Action' },
@@ -92,8 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Bad Ice Cream 3', folder: 'bad-ice-cream-3', category: 'Strategy' },
 
         // ACTION GAMES
-        { name: 'Badicecream', folder: 'badicecream', category: 'Action' },
-        { name: 'Badicecream2', folder: 'badicecream2', category: 'Action' },
+        { name: 'Bad Ice Cream v2', folder: 'badicecream', category: 'Action' },
+        { name: 'Bad Ice Cream v3', folder: 'badicecream2', category: 'Action' },
 
         // STRATEGY GAMES
         { name: 'Ball Sort Halloween', folder: 'ball-sort-halloween', category: 'Strategy' },
@@ -106,8 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Basket Random', folder: 'basket-random', category: 'Driving' },
         { name: 'Basket and Ball', folder: 'basket-and-ball', category: 'Driving' },
         { name: 'Basketball Stars', folder: 'basketball-stars', category: 'Driving' },
-        { name: 'Basketballstars', folder: 'basketballstars', category: 'Driving' },
-        { name: 'Basketrandom', folder: 'basketrandom', category: 'Driving' },
+        { name: 'Basketball Stars v2', folder: 'basketballstars', category: 'Driving' },
+        { name: 'Basket Random v2', folder: 'basketrandom', category: 'Driving' },
 
         // STRATEGY GAMES
         { name: 'Battle for Gondor', folder: 'battleforgondor', category: 'Strategy' },
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Boxing Random', folder: 'boxing-random', category: 'Driving' },
 
         // ACTION GAMES
-        { name: 'Boxingrandom', folder: 'boxingrandom', category: 'Action' },
+        { name: 'Boxing Random v2', folder: 'boxingrandom', category: 'Action' },
 
         // STRATEGY GAMES
         { name: 'Breaking The Bank', folder: 'breakingthebank', category: 'Strategy' },
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // CASUAL GAMES
         { name: 'Cookie Clicker', folder: 'cookie-clicker', category: 'Casual' },
-        { name: 'Cookieclicker', folder: 'cookieclicker', category: 'Casual' },
+        { name: 'Cookie Clicker v2', folder: 'cookieclicker', category: 'Casual' },
         { name: 'Core Ball', folder: 'core-ball', category: 'Casual' },
 
         // ACTION GAMES
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Crazy Cars', folder: 'crazy-cars', category: 'Driving' },
 
         // ACTION GAMES
-        { name: 'Crazycattle3D', folder: 'crazycattle3d', category: 'Action' },
+        { name: 'Crazy Cattle 3D', folder: 'crazycattle3d', category: 'Action' },
         { name: 'Creative Kill Chamber', folder: 'creativekillchamber', category: 'Action' },
 
         // STRATEGY GAMES
@@ -242,8 +242,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Cut The Rope TR', folder: 'ctr-tr', category: 'Strategy' },
 
         // ACTION GAMES
-        { name: 'Cuttherope.Broken', folder: 'cuttherope.broken', category: 'Action' },
-        { name: 'Cuttherope2.Broken', folder: 'cuttherope2.broken', category: 'Action' },
+        { name: 'Cut The Rope v2', folder: 'cuttherope.broken', category: 'Action' },
+        { name: 'Cut The Rope v3', folder: 'cuttherope2.broken', category: 'Action' },
         { name: 'Dante', folder: 'dante', category: 'Action' },
         { name: 'Dead Again', folder: 'dead-again', category: 'Action' },
 
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // CASUAL GAMES
         { name: 'Doge Miner', folder: 'DogeMiner', category: 'Casual' },
         { name: 'Doodle Jump', folder: 'doodle-jump', category: 'Casual' },
-        { name: 'Doodlejump', folder: 'doodlejump', category: 'Casual' },
+        { name: 'Doodle Jump v2', folder: 'doodlejump', category: 'Casual' },
 
         // ACTION GAMES
         { name: 'Down The Hill', folder: 'down-the-hill', category: 'Action' },
@@ -293,8 +293,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Duck Life 2', folder: 'ducklife-2', category: 'Casual' },
         { name: 'Duck Life 3', folder: 'ducklife-3', category: 'Casual' },
         { name: 'Duck Life 4', folder: 'ducklife4', category: 'Casual' },
-        { name: 'Ducklife2', folder: 'ducklife2', category: 'Casual' },
-        { name: 'Ducklife3', folder: 'ducklife3', category: 'Casual' },
+        { name: 'Duck Life v5', folder: 'ducklife2', category: 'Casual' },
+        { name: 'Duck Life v6', folder: 'ducklife3', category: 'Casual' },
 
         // STRATEGY GAMES
         { name: 'Edge Not Found', folder: 'edgenotfound', category: 'Strategy' },
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Edge Surf', folder: 'edge-surf', category: 'Driving' },
 
         // ACTION GAMES
-        { name: 'Edgesurf', folder: 'edgesurf', category: 'Action' },
+        { name: 'Edge Surf v2', folder: 'edgesurf', category: 'Action' },
 
         // CASUAL GAMES
         { name: 'Eel Slap', folder: 'eel-slap', category: 'Casual' },
@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // ACTION GAMES
         { name: 'Evil Glitch', folder: 'evil-glitch', category: 'Action' },
-        { name: 'Evilglitch', folder: 'evilglitch', category: 'Action' },
+        { name: 'Evil Glitch v2', folder: 'evilglitch', category: 'Action' },
 
         // STRATEGY GAMES
         { name: 'Evolution', folder: 'evolution', category: 'Strategy' },
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Factory Balls', folder: 'factoryballs', category: 'Strategy' },
 
         // ACTION GAMES
-        { name: 'Factoryballsforever', folder: 'factoryballsforever', category: 'Action' },
+        { name: 'Factory Balls Forever', folder: 'factoryballsforever', category: 'Action' },
 
         // CASUAL GAMES
         { name: 'Fake Virus', folder: 'fake-virus', category: 'Casual' },
@@ -352,13 +352,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // ACTION GAMES
         { name: 'Fireboy & Watergirl', folder: 'fireboywatergirlforesttemple', category: 'Action' },
-        { name: 'Fireboyandwatergirlintheforesttemple', folder: 'fireboyandwatergirlintheforesttemple', category: 'Action' },
+        { name: 'Fireboy & Watergirl v2', folder: 'fireboyandwatergirlintheforesttemple', category: 'Action' },
         { name: 'Fishing Game', folder: 'generic-fishing-game', category: 'Action' },
 
         // CASUAL GAMES
         { name: 'Flappy Bird', folder: 'flappy-bird', category: 'Casual' },
-        { name: 'Flappybird', folder: 'flappybird', category: 'Casual' },
-        { name: 'Flappybird.Old', folder: 'flappybird.old', category: 'Casual' },
+        { name: 'Flappy Bird v2', folder: 'flappybird', category: 'Casual' },
+        { name: 'Flappy Bird v3', folder: 'flappybird.old', category: 'Casual' },
 
         // STRATEGY GAMES
         { name: 'Flash Tetris', folder: 'flashtetris', category: 'Strategy' },
@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Football Strike', folder: 'football-strike', category: 'Driving' },
 
         // ACTION GAMES
-        { name: 'Friendlyfire', folder: 'friendlyfire', category: 'Action' },
+        { name: 'Friendly Fire', folder: 'friendlyfire', category: 'Action' },
 
         // CASUAL GAMES
         { name: 'Fruit Ninja', folder: 'fruit-ninja', category: 'Casual' },
@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // ACTION GAMES
         { name: 'Frying Nemo', folder: 'frying-nemo', category: 'Action' },
         { name: 'Funny Shooter 2', folder: 'funnyshooter2', category: 'Action' },
-        { name: 'Funnyshooter', folder: 'funnyshooter', category: 'Action' },
+        { name: 'Funny Shooter', folder: 'funnyshooter', category: 'Action' },
         { name: 'G-Switch', folder: 'gswitch', category: 'Action' },
         { name: 'G-Switch 2', folder: 'gswitch-2', category: 'Action' },
         { name: 'G-Switch 3', folder: 'gswitch-3', category: 'Action' },
@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // ACTION GAMES
         { name: 'Geodash', folder: 'geodash', category: 'Action' },
         { name: 'Geometry Dash', folder: 'geometry-dash', category: 'Action' },
-        { name: 'Geometrydash', folder: 'geometrydash', category: 'Action' },
+        { name: 'Geometry Dash v2', folder: 'geometrydash', category: 'Action' },
 
         // STRATEGY GAMES
         { name: 'George & The Printer', folder: 'georgeandtheprinter', category: 'Strategy' },
@@ -467,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // ACTION GAMES
         { name: 'Hungry Lamu', folder: 'hungry-lamu', category: 'Action' },
-        { name: 'Iceagebabyadventure', folder: 'iceagebabyadventure', category: 'Action' },
+        { name: 'Ice Age Baby Adventure', folder: 'iceagebabyadventure', category: 'Action' },
 
         // STRATEGY GAMES
         { name: 'Icy Head 2', folder: 'icy-head-2', category: 'Strategy' },
@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // STRATEGY GAMES
         { name: 'Jewels Blitz 5', folder: 'jewels-blitz-5', category: 'Strategy' },
-        { name: 'Jumpingfrogspuzzle', folder: 'jumpingfrogspuzzle', category: 'Strategy' },
+        { name: 'Jumping Frogs Puzzle', folder: 'jumpingfrogspuzzle', category: 'Strategy' },
 
         // ACTION GAMES
         { name: 'Just Fall', folder: 'just-fall', category: 'Action' },
@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Learn to Fly', folder: 'learntofly', category: 'Casual' },
 
         // ACTION GAMES
-        { name: 'Learntofly2', folder: 'learntofly2', category: 'Action' },
+        { name: 'Learn to Fly 2', folder: 'learntofly2', category: 'Action' },
 
         // CASUAL GAMES
         { name: 'Little Alchemy 2', folder: 'little-alchemy-2', category: 'Casual' },
@@ -521,9 +521,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // ACTION GAMES
         { name: 'Mario', folder: 'mario', category: 'Action' },
         { name: 'Mario Bros', folder: 'mario-bros', category: 'Action' },
-        { name: 'Minecraft0.30', folder: 'minecraft0.30', category: 'Action' },
-        { name: 'Minecraft1.3', folder: 'minecraft1.3', category: 'Action' },
-        { name: 'Minecraft1.5.2', folder: 'minecraft1.5.2', category: 'Action' },
+        { name: 'Minecraft 0.30', folder: 'minecraft0.30', category: 'Action' },
+        { name: 'Minecraft 1.3', folder: 'minecraft1.3', category: 'Action' },
+        { name: 'Minecraft 1.5.2', folder: 'minecraft1.5.2', category: 'Action' },
         { name: 'Motox3M2', folder: 'motox3m2', category: 'Action' },
         { name: 'Ovo', folder: 'ovo', category: 'Action' },
         { name: 'Pacman', folder: 'pacman', category: 'Action' },
@@ -537,33 +537,33 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Radiusraid', folder: 'radiusraid', category: 'Action' },
         { name: 'Retrobowl', folder: 'retrobowl', category: 'Action' },
         { name: 'Retrohaunt', folder: 'retrohaunt', category: 'Action' },
-        { name: 'Riddleschool', folder: 'riddleschool', category: 'Action' },
-        { name: 'Riddleschool2', folder: 'riddleschool2', category: 'Action' },
-        { name: 'Riddleschool3', folder: 'riddleschool3', category: 'Action' },
-        { name: 'Riddleschool4', folder: 'riddleschool4', category: 'Action' },
-        { name: 'Riddleschool5', folder: 'riddleschool5', category: 'Action' },
+        { name: 'Riddle School', folder: 'riddleschool', category: 'Action' },
+        { name: 'Riddle School 2', folder: 'riddleschool2', category: 'Action' },
+        { name: 'Riddle School 3', folder: 'riddleschool3', category: 'Action' },
+        { name: 'Riddle School 4', folder: 'riddleschool4', category: 'Action' },
+        { name: 'Riddle School 5', folder: 'riddleschool5', category: 'Action' },
         { name: 'Roadblocks', folder: 'roadblocks', category: 'Action' },
-        { name: 'Rooftopsnipers', folder: 'rooftopsnipers', category: 'Action' },
-        { name: 'Sleepingbeauty', folder: 'sleepingbeauty', category: 'Action' },
+        { name: 'Rooftop Snipers', folder: 'rooftopsnipers', category: 'Action' },
+        { name: 'Sleeping Beauty', folder: 'sleepingbeauty', category: 'Action' },
         { name: 'Slope', folder: 'slope', category: 'Action' },
         { name: 'Snake', folder: 'snake', category: 'Action' },
-        { name: 'Snowrider3D', folder: 'snowrider3d', category: 'Action' },
+        { name: 'Snow Rider 3D', folder: 'snowrider3d', category: 'Action' },
 
         // DRIVING GAMES
-        { name: 'Soccerrandom', folder: 'soccerrandom', category: 'Driving' },
+        { name: 'Soccer Random', folder: 'soccerrandom', category: 'Driving' },
 
         // ACTION GAMES
-        { name: 'Spacecompany', folder: 'spacecompany', category: 'Action' },
-        { name: 'Spaceinvaders', folder: 'spaceinvaders', category: 'Action' },
+        { name: 'Space Company', folder: 'spacecompany', category: 'Action' },
+        { name: 'Space Invaders', folder: 'spaceinvaders', category: 'Action' },
         { name: 'Steal A Brainrot', folder: 'steal-a-brainrot', category: 'Action' },
 
         // STRATEGY GAMES
         { name: 'Tetris', folder: 'tetris', category: 'Strategy' },
 
         // ACTION GAMES
-        { name: 'Thechromaincident', folder: 'thechromaincident', category: 'Action' },
-        { name: 'Thereisnogame', folder: 'thereisnogame', category: 'Action' },
-        { name: 'Towermaster', folder: 'towermaster', category: 'Action' },
+        { name: 'The Chrome Incident', folder: 'thechromaincident', category: 'Action' },
+        { name: 'There Is No Game', folder: 'thereisnogame', category: 'Action' },
+        { name: 'Tower Master', folder: 'towermaster', category: 'Action' },
         { name: 'Tunnelrush', folder: 'tunnelrush', category: 'Action' },
         { name: 'Underrun', folder: 'underrun', category: 'Action' },
         { name: 'Vex3', folder: 'vex3', category: 'Action' },
@@ -573,13 +573,13 @@ document.addEventListener('DOMContentLoaded', function() {
         { name: 'Vex7', folder: 'vex7', category: 'Action' },
 
         // DRIVING GAMES
-        { name: 'Volleyrandom', folder: 'volleyrandom', category: 'Driving' },
+        { name: 'Volley Random', folder: 'volleyrandom', category: 'Driving' },
 
         // ACTION GAMES
         { name: 'Webretro', folder: 'webretro', category: 'Action' },
-        { name: 'Worldshardestgame', folder: 'worldshardestgame', category: 'Action' },
-        { name: 'Worldshardestgame2', folder: 'worldshardestgame2', category: 'Action' },
-        { name: 'Xx142B2.Exe', folder: 'xx142b2.exe', category: 'Action' },
+        { name: 'World\'s Hardest Game', folder: 'worldshardestgame', category: 'Action' },
+        { name: 'World\'s Hardest Game 2', folder: 'worldshardestgame2', category: 'Action' },
+        { name: 'XX142B2.exe', folder: 'xx142b2.exe', category: 'Action' },
     ];
 
     // Sort games alphabetically
@@ -1394,30 +1394,39 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ===== RESET STATS =====
-    document.getElementById('resetStatsBtn').addEventListener('click', () => {
-        if (confirm('Are you sure you want to reset all stats and progress? This will also reset all achievements.')) {
-            localStorage.clear();
-            gamePlayTimes = {};
-            favorites = [];
-            lastPlayedGames = [];
+    const resetStatsBtn = document.getElementById('resetStatsBtn');
+    if (resetStatsBtn) {
+        resetStatsBtn.addEventListener('click', function(e) {
+            console.log("Reset button clicked!");
+            e.preventDefault();
+            e.stopPropagation();
             
-            // Reset achievements
-            achievements = {};
-            dailyStreak = 0;
-            lastPlayDate = null;
-            totalXP = 0;
-
-            document.getElementById('totalPlaytime').textContent = '00:00:00';
-            document.getElementById('gamePlaytimeList').innerHTML = '';
-
-            generateGameCards();
-            updateFavoritesGrid();
-            updateSimilarGames();
-            updateStatsRibbon();
-            updatePlayTimeDisplay();
-            updateAchievementsDisplay();
-        }
-    });
+            console.log("Showing confirm dialog...");
+            const confirmed = window.confirm('Are you sure you want to reset all stats and progress? This will also reset all achievements.');
+            console.log("Confirm result:", confirmed);
+            
+            if (confirmed) {
+                console.log("User confirmed - clearing localStorage...");
+                try {
+                    // Clear all localStorage data
+                    localStorage.clear();
+                    console.log("localStorage cleared. Reloading page...");
+                    
+                    // Reload the page to reset all variables
+                    window.location.reload();
+                } catch (error) {
+                    console.error('Error resetting data:', error);
+                    alert('An error occurred: ' + error.message);
+                }
+            } else {
+                console.log("User cancelled reset");
+            }
+            return false;
+        });
+        console.log("Reset button event listener attached");
+    } else {
+        console.error("Reset button not found!");
+    }
 
     // ===== VIEW OPTIONS =====
     document.querySelectorAll('.view-btn').forEach(btn => {
